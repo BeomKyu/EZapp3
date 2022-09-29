@@ -12,11 +12,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <Button
+            android:id="@+id/electirc_vehicle_tips_button1"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:gravity="center"
-            android:background="#ccffcc"
+            android:background="#E8FBE2"
             android:textSize="20dp"
             android:text="[전기차 이용 팁 모음]"
             android:textColor="#336633"
@@ -26,7 +27,7 @@
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:id="@+id/electirc_vehicle_tips_button"/>
+            android:id="@+id/electirc_vehicle_tips_button2"/>
 
         <ImageButton
             android:id="@+id/find_charging_station_button"
