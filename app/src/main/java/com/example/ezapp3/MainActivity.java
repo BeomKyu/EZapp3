@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         myFindChargingStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), com.example.ezapp3.FindChargingStationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), FindChargingStationActivity.class);
                 startActivity(intent);
             }
         });
