@@ -1,8 +1,11 @@
 package com.example.ezapp3;
 
+import android.annotation.SuppressLint;
+import android.location.Location;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -14,7 +17,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class FindChargingStationActivity extends AppCompatActivity
-        implements GoogleMap.OnInfoWindowClickListener,
+        implements GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback{
 
     @Override
@@ -28,16 +32,43 @@ public class FindChargingStationActivity extends AppCompatActivity
 
     }
 
+    @SuppressLint("MissingPermission")
     @Override
-    public void onMapReady(GoogleMap googleMap){
-        final LatLng melbo = new LatLng(-37.81319, 144.96298);
-        Marker melbourne = googleMap.addMarker(new MarkerOptions()
-                .position(melbo).title("title"));
-        googleMap.setOnInfoWindowClickListener(this);
+    public void onMapReady(GoogleMap map) {
+        // TODO: Before enabling the My Location layer, you must request
+        // location permission from the user. This sample does not include
+        // a request for location permission.
+        map.setMyLocationEnabled(true);
+        map.setOnMyLocationButtonClickListener(this);
+        map.setOnMyLocationClickListener(this);
+        UpdateMapUi(map);
+    }
+
+    private void UpdateMapUi(GoogleMap map) {
+        map.getUiSettings().setZoomControlsEnabled(true);
+        map.getUiSettings().setCompassEnabled(true);
+        map.getUiSettings().setMapToolbarEnabled(true);
+        map.getUiSettings().setZoomGesturesEnabled(true);
+        map.getUiSettings().setScrollGesturesEnabled(true);
+
+
+        map.getUiSettings().setTiltGesturesEnabled(false);
+        map.getUiSettings().setRotateGesturesEnabled(false);
+    }
+
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG)
+                .show();
     }
 
     @Override
-    public void onInfoWindowClick(Marker marker){
-        Toast.makeText(this, "Marker clicked", Toast.LENGTH_SHORT).show();
+    public boolean onMyLocationButtonClick() {
+        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT)
+                .show();
+        // Return false so that we don't consume the event and the default behavior still occurs
+        // (the camera animates to the user's current position).
+        return false;
     }
 }
