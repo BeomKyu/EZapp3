@@ -3,6 +3,7 @@ package com.example.ezapp3;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +16,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ImageButton myFindChargingStation =(ImageButton) findViewById(R.id.find_charging_station_button);
-        ImageButton myElectricVehicleTips =(ImageButton) findViewById(R.id.electirc_vehicle_tips_button);
+<<<<<<<<< Temporary merge branch 1
+        Button myElectricVehicleTips1 = (Button) findViewById(R.id.electirc_vehicle_tips_button1);
+        ImageButton myElectricVehicleTips2 = (ImageButton) findViewById(R.id.electirc_vehicle_tips_button2);
+=========
+        Button myElectricVehicleTips1 =(Button) findViewById(R.id.electirc_vehicle_tips_button1);
+        ImageButton myElectricVehicleTips2 =(ImageButton) findViewById(R.id.electirc_vehicle_tips_button2);
+>>>>>>>>> Temporary merge branch 2
         ImageButton myHome =(ImageButton) findViewById(R.id.home_button);
         ImageButton myfavorites =(ImageButton) findViewById(R.id.favorites_button);
         ImageButton myprofile =(ImageButton) findViewById(R.id.profile_button);
@@ -23,7 +30,22 @@ public class MainActivity extends AppCompatActivity {
         myFindChargingStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), com.example.ezapp3.FindChargingStationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), FindChargingStationActivity.class);
+                startActivity(intent);
+            }
+        });
+        myElectricVehicleTips1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ElectricVehicleTips.class);
+                startActivity(intent);
+            }
+        });
+
+        myElectricVehicleTips1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), com.example.ezapp3.ElectricVehicleTips.class);
                 startActivity(intent);
             }
         });
