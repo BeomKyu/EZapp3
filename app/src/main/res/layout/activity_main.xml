@@ -39,12 +39,21 @@
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/find_charging_station_button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/rectiangle"/>
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectiangle"
+            >
+
+            <ImageButton
+                android:id="@+id/find_charging_station_button"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp"
+                android:background="#e8fbe2"
+                android:src="@drawable/ic_station_logo" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
