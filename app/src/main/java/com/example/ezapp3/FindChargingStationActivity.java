@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.location.CurrentLocationRequest;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -19,6 +29,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class FindChargingStationActivity extends AppCompatActivity
         implements GoogleMap.OnMyLocationButtonClickListener,
@@ -32,6 +43,10 @@ public class FindChargingStationActivity extends AppCompatActivity
     private boolean permissionDenied = false;
 
     private GoogleMap map;
+
+    private FusedLocationProviderClient fusedLocationClient;
+
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +56,45 @@ public class FindChargingStationActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        fusedLocationClient= LocationServices.getFusedLocationProviderClient(this);
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @SuppressLint("MissingPermission")
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            LatLng myLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+//                                Log.d("location", "AAA" +location.toString());
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 17));
+                            // Logic to handle location object
+                        }
+                        else{
+                            LocationRequest locationRequest = LocationRequest.create().
+                                    setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                                    .setInterval(300)
+                                    .setFastestInterval(200);
+
+                            LocationCallback locationCallback = new LocationCallback() {
+                                @Override
+                                public void onLocationResult(@NonNull LocationResult locationResult) {
+                                    super.onLocationResult(locationResult);
+                                    if(locationResult == null)
+                                        return;
+                                    for(Location myLocation:locationResult.getLocations()){
+                                        LatLng myLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 17));
+                                        fusedLocationClient.removeLocationUpdates(this);
+                                    }
+                                }
+                            };
+                            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+                        }
+                    }
+                });
     }
 
-    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -54,7 +105,16 @@ public class FindChargingStationActivity extends AppCompatActivity
         map.setOnMyLocationButtonClickListener(this);
         map.setOnMyLocationClickListener(this);
         enableMyLocation();
-//        UpdateMapUi(map);
+
+        map.getUiSettings().setZoomControlsEnabled(true);
+        map.getUiSettings().setCompassEnabled(true);
+        map.getUiSettings().setMapToolbarEnabled(true);
+        map.getUiSettings().setZoomGesturesEnabled(true);
+        map.getUiSettings().setScrollGesturesEnabled(true);
+
+
+        map.getUiSettings().setTiltGesturesEnabled(false);
+        map.getUiSettings().setRotateGesturesEnabled(false);
     }
 
     @SuppressLint("MissingPermission")
@@ -64,36 +124,13 @@ public class FindChargingStationActivity extends AppCompatActivity
         || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
         == PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
+
             return;
         }
         PermissionUtils.requestLocationPermissions(this, LOCATION_PERMISSION_REQUEST_CODE, true);
 
     }
 
-//    private void UpdateMapUi(GoogleMap map) {
-//        map.getUiSettings().setZoomControlsEnabled(true);
-//        map.getUiSettings().setCompassEnabled(true);
-//        map.getUiSettings().setMapToolbarEnabled(true);
-//        map.getUiSettings().setZoomGesturesEnabled(true);
-//        map.getUiSettings().setScrollGesturesEnabled(true);
-//
-//
-//        map.getUiSettings().setTiltGesturesEnabled(false);
-//        map.getUiSettings().setRotateGesturesEnabled(false);
-//    }
-
-    @Override
-    public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT)
-                .show();
-        return false;
-    }
-
-    @Override
-    public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG)
-                .show();
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -136,11 +173,23 @@ public class FindChargingStationActivity extends AppCompatActivity
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
-
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
 
         return false;
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT)
+                .show();
+        return false;
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG)
+                .show();
     }
 
 }
