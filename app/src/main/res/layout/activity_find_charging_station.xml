@@ -14,25 +14,38 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="15dp"
-
         android:orientation="vertical">
-<!--        android:background="#ccffcc"-->
 
-        >
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/half_rectiangle"
-            android:text=" 충전소찾기"
-            android:textColor="#227106"
-            android:textSize="25dp"/>
+            android:orientation="vertical">
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:map="http://schemas.android.com/apk/res-auto"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:id="@+id/map"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/half_rectiangle"
+                android:text=" 충전소찾기"
+                android:textColor="#227106"
+                android:textSize="25dp"/>
+
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:map="http://schemas.android.com/apk/res-auto"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"/>
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/add_marker_btn"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_information"
+            android:background="@drawable/rectiangle"/>
 
     </LinearLayout>
 

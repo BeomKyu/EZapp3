@@ -7,6 +7,8 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -52,12 +54,69 @@ public class FindChargingStationActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_charging_station);
 
+        ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_marker_btn);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         fusedLocationClient= LocationServices.getFusedLocationProviderClient(this);
 
+        add_marker_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final LatLng melbourneLatLng = new LatLng(37.4962, 126.9569);
+                Marker melbourne = map.addMarker(
+                        new MarkerOptions()
+                                .position(melbourneLatLng)
+                                .title("숭실대"));
+                melbourne.showInfoWindow();
+            }
+        });
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        map = googleMap;
+        // TODO: Before enabling the My Location layer, you must request
+        // location permission from the user. This sample does not include
+        // a request for location permission.
+        map.setOnMyLocationButtonClickListener(this);
+        map.setOnMyLocationClickListener(this);
+        map.setOnMarkerClickListener(this);
+        enableMyLocation();
+
+        map.getUiSettings().setZoomControlsEnabled(true);
+        map.getUiSettings().setCompassEnabled(true);
+        map.getUiSettings().setMapToolbarEnabled(true);
+        map.getUiSettings().setZoomGesturesEnabled(true);
+        map.getUiSettings().setScrollGesturesEnabled(true);
+
+
+        map.getUiSettings().setTiltGesturesEnabled(false);
+        map.getUiSettings().setRotateGesturesEnabled(false);
+    }
+
+    @SuppressLint("MissingPermission")
+    private void enableMyLocation() {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        == PackageManager.PERMISSION_GRANTED
+        || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+        == PackageManager.PERMISSION_GRANTED) {
+            map.setMyLocationEnabled(true);
+
+            moved_last_location();
+
+            return;
+        }
+        PermissionUtils.requestLocationPermissions(this, LOCATION_PERMISSION_REQUEST_CODE, true);
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private void moved_last_location(){
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @SuppressLint("MissingPermission")
@@ -93,42 +152,6 @@ public class FindChargingStationActivity extends AppCompatActivity
                         }
                     }
                 });
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        map = googleMap;
-        // TODO: Before enabling the My Location layer, you must request
-        // location permission from the user. This sample does not include
-        // a request for location permission.
-        map.setOnMyLocationButtonClickListener(this);
-        map.setOnMyLocationClickListener(this);
-        enableMyLocation();
-
-        map.getUiSettings().setZoomControlsEnabled(true);
-        map.getUiSettings().setCompassEnabled(true);
-        map.getUiSettings().setMapToolbarEnabled(true);
-        map.getUiSettings().setZoomGesturesEnabled(true);
-        map.getUiSettings().setScrollGesturesEnabled(true);
-
-
-        map.getUiSettings().setTiltGesturesEnabled(false);
-        map.getUiSettings().setRotateGesturesEnabled(false);
-    }
-
-    @SuppressLint("MissingPermission")
-    private void enableMyLocation() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-        == PackageManager.PERMISSION_GRANTED
-        || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-        == PackageManager.PERMISSION_GRANTED) {
-            map.setMyLocationEnabled(true);
-
-            return;
-        }
-        PermissionUtils.requestLocationPermissions(this, LOCATION_PERMISSION_REQUEST_CODE, true);
-
     }
 
 

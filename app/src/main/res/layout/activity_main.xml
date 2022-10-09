@@ -16,9 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-
-            >
+            android:layout_marginTop="8dp">
 
             <Button
                 android:id="@+id/electirc_vehicle_tips_button1"
@@ -33,7 +31,7 @@
 
             <ImageButton
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="280dp"
                 android:src="@drawable/unnamed"
                 android:id="@+id/electirc_vehicle_tips_button2" />
 
