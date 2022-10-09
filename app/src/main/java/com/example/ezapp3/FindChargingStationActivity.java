@@ -65,14 +65,18 @@ public class FindChargingStationActivity extends AppCompatActivity
         add_marker_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final LatLng melbourneLatLng = new LatLng(37.4962, 126.9569);
-                Marker melbourne = map.addMarker(
-                        new MarkerOptions()
-                                .position(melbourneLatLng)
-                                .title("숭실대"));
-                melbourne.showInfoWindow();
+                add_marker_to_map(new LatLng(37.4962, 126.9569), "숭실대");
             }
         });
+
+    }
+
+    public void add_marker_to_map(LatLng marker_location, String title){
+        Marker melbourne = map.addMarker(
+                new MarkerOptions()
+                        .position(marker_location)
+                        .title(title));
+        melbourne.showInfoWindow();
 
     }
 
