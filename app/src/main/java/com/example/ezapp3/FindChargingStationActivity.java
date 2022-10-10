@@ -84,6 +84,7 @@ public class FindChargingStationActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
 
         map = googleMap;
+
         // TODO: Before enabling the My Location layer, you must request
         // location permission from the user. This sample does not include
         // a request for location permission.
@@ -111,13 +112,19 @@ public class FindChargingStationActivity extends AppCompatActivity
         == PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
 
-            moved_last_location();
+//            moved_last_location();
+//            moved_last_location();
+            search_current_place();
 
             return;
         }
         PermissionUtils.requestLocationPermissions(this, LOCATION_PERMISSION_REQUEST_CODE, true);
 
     }
+
+    /*
+    *   가장 최근의 위치 받아오는 함수
+     */
 
     @SuppressLint("MissingPermission")
     private void moved_last_location(){
@@ -134,28 +141,36 @@ public class FindChargingStationActivity extends AppCompatActivity
                             // Logic to handle location object
                         }
                         else{
-                            LocationRequest locationRequest = LocationRequest.create().
-                                    setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                                    .setInterval(300)
-                                    .setFastestInterval(200);
-
-                            LocationCallback locationCallback = new LocationCallback() {
-                                @Override
-                                public void onLocationResult(@NonNull LocationResult locationResult) {
-                                    super.onLocationResult(locationResult);
-                                    if(locationResult == null)
-                                        return;
-                                    for(Location myLocation:locationResult.getLocations()){
-                                        LatLng myLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 17));
-                                        fusedLocationClient.removeLocationUpdates(this);
-                                    }
-                                }
-                            };
-                            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+                            search_current_place();
                         }
                     }
                 });
+    }
+/*
+*   최신의 현재위치 받아오는 함수
+ */
+    @SuppressLint("MissingPermission")
+    private void search_current_place(){
+        LocationRequest locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(300)
+                .setFastestInterval(200);
+
+        LocationCallback locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                if(locationResult == null)
+                    return;
+                for(Location myLocation:locationResult.getLocations()){
+                    LatLng myLatLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 25));
+                    fusedLocationClient.removeLocationUpdates(this);
+                }
+            }
+        };
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+
     }
 
 
