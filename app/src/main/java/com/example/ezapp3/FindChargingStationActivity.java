@@ -113,7 +113,7 @@ public class FindChargingStationActivity extends AppCompatActivity
             map.setMyLocationEnabled(true);
 
 //            moved_last_location();
-//            moved_last_location();
+            moved_last_location();
             search_current_place();
 
             return;
