@@ -143,8 +143,6 @@ public class CurrentPlace extends AppCompatActivity
                 TextView title = infoWindow.findViewById(R.id.title);
                 title.setText(marker.getTitle());
 
-                TextView snippet = infoWindow.findViewById(R.id.snippet);
-                snippet.setText(marker.getSnippet());
 
                 return infoWindow;
             }

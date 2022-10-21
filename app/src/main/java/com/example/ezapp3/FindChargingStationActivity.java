@@ -7,11 +7,13 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -33,12 +35,15 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class FindChargingStationActivity extends AppCompatActivity
         implements GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener,
-        ActivityCompat.OnRequestPermissionsResultCallback{
+        ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
@@ -57,26 +62,29 @@ public class FindChargingStationActivity extends AppCompatActivity
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_marker_btn);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.google_map);
         mapFragment.getMapAsync(this);
 
-        fusedLocationClient= LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         add_marker_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add_marker_to_map(new LatLng(37.4962, 126.9569), "숭실대");
+                add_marker_to_map(new LatLng(37.4962, 126.9569),
+                        "서울특별시 동작구 상도로 369 서울특별시 동작구 전기차 충전소",
+                        "1522-1782,24시간 이용가능,한국전기차충전서비스,무료");
             }
         });
 
     }
 
-    public void add_marker_to_map(LatLng marker_location, String title){
-        Marker melbourne = map.addMarker(
-                new MarkerOptions()
-                        .position(marker_location)
-                        .title(title));
-        melbourne.showInfoWindow();
+    public void add_marker_to_map(LatLng marker_location, String title,
+                                  String snippet) {
+        this.map.addMarker(new MarkerOptions()
+                .position(marker_location)
+                .title(title)
+                .snippet(snippet));
+//        melbourne.showInfoWindow();
 
     }
 
@@ -102,6 +110,9 @@ public class FindChargingStationActivity extends AppCompatActivity
 
         map.getUiSettings().setTiltGesturesEnabled(false);
         map.getUiSettings().setRotateGesturesEnabled(false);
+
+        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this);
+        map.setInfoWindowAdapter(adapter);
     }
 
     @SuppressLint("MissingPermission")
@@ -146,6 +157,7 @@ public class FindChargingStationActivity extends AppCompatActivity
                     }
                 });
     }
+
 /*
 *   최신의 현재위치 받아오는 함수
  */
@@ -217,9 +229,19 @@ public class FindChargingStationActivity extends AppCompatActivity
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
+        Toast.makeText(this, "Marker button clicked"
+                + marker.getId() + marker.getPosition(), Toast.LENGTH_SHORT)
+                .show();
 
         return false;
     }
+
+    /*
+    InfoWindowAdapter
+    GoogleMap.setInfoWindowAdapter
+    getInfoWindow
+    getInfoContents
+     */
 
     @Override
     public boolean onMyLocationButtonClick() {

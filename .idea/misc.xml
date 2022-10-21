@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/drawable-v24/half_rectiangle.xml" value="0.133" />
+        <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/drawable/rectiangle.xml" value="0.133" />
+        <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/drawable/white_rectiangle.xml" value="0.133" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/activity_current_place.xml" value="0.254981884057971" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/activity_electric_vehicle_tips.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/activity_find_charging_station.xml" value="0.1" />
@@ -10,6 +13,7 @@
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/activity_maps.xml" value="0.254981884057971" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/custom_info_contents.xml" value="0.254981884057971" />
+        <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/custominfowindow.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/menu/current_place_menu.xml" value="0.35520833333333335" />
       </map>
     </option>
