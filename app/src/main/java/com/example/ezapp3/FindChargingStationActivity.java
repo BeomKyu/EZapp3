@@ -2,6 +2,7 @@ package com.example.ezapp3;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -53,6 +55,8 @@ public class FindChargingStationActivity extends AppCompatActivity
 
     private FusedLocationProviderClient fusedLocationClient;
 
+    Button APIbtn;
+
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,16 @@ public class FindChargingStationActivity extends AppCompatActivity
                 add_marker_to_map(new LatLng(37.4962, 126.9569),
                         "서울특별시 동작구 상도로 369 서울특별시 동작구 전기차 충전소",
                         "1522-1782,24시간 이용가능,한국전기차충전서비스,무료");
+            }
+        });
+
+        APIbtn = findViewById(R.id.APIDatabtn);
+
+        APIbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), APISempleActivity.class);
+                startActivity(intent);
             }
         });
 

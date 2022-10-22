@@ -21,13 +21,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/half_rectiangle"
-                android:text=" 충전소찾기"
-                android:textColor="#227106"
-                android:textSize="25dp"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/half_rectiangle"
+                    android:text=" 충전소찾기"
+                    android:textColor="#227106"
+                    android:textSize="25dp"/>
+
+                <Button
+                    android:id="@+id/APIDatabtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="190dp"
+                    android:text="APIDAta"/>
+
+            </LinearLayout>
 
             <fragment xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:map="http://schemas.android.com/apk/res-auto"
