@@ -39,6 +39,7 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -58,11 +59,12 @@ public class FindChargingStationActivity extends AppCompatActivity
 
     private FusedLocationProviderClient fusedLocationClient;
 
-    List<Place.Field> placeFields = Collections.singletonList(Place.Field.NAME);
+    List<Place.Field> placeFields = Arrays.asList(
+            Place.Field.NAME, Place.Field.ADDRESS, Place.Field.ID);
 
     FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
 
-    PlacesClient placesClient = Places.createClient(this);
+    PlacesClient placesClient;
 
     Button APIbtn;
 
@@ -73,6 +75,7 @@ public class FindChargingStationActivity extends AppCompatActivity
         setContentView(R.layout.activity_find_charging_station);
 
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_marker_btn);
+        APIbtn = findViewById(R.id.APIDatabtn);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.google_map);
@@ -80,14 +83,15 @@ public class FindChargingStationActivity extends AppCompatActivity
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+        Places.initialize(this, BuildConfig.MAPS_API_KEY);
+        placesClient = Places.createClient(this);
+
         add_marker_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 search_around_charging_station();
             }
         });
-
-        APIbtn = findViewById(R.id.APIDatabtn);
 
         APIbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,33 +104,36 @@ public class FindChargingStationActivity extends AppCompatActivity
     }
 
     public void search_around_charging_station(){
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//            @SuppressLint("MissingPermission") Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
-//            placeResponse.addOnCompleteListener(task -> {
-//                if (task.isSuccessful()){
-//                    FindCurrentPlaceResponse response = task.getResult();
-//                    for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-//                        Toast.makeText(this, String.format("Place '%s' has likelihood: %f",
-//                                placeLikelihood.getPlace().getName(),
-//                                placeLikelihood.getLikelihood()), Toast.LENGTH_SHORT)
-//                                .show();
-//                        Log.i(TAG, String.format("Place '%s' has likelihood: %f",
-//                                placeLikelihood.getPlace().getName(),
-//                                placeLikelihood.getLikelihood()));
-//                    }
-//                } else {
-//                    Exception exception = task.getException();
-//                    if (exception instanceof ApiException) {
-//                        ApiException apiException = (ApiException) exception;
-//                        Log.e(TAG, "Place not found: " + apiException.getStatusCode());
-//                    }
-//                }
-//            });
-//        } else {
-//            // A local method to request required permissions;
-//            // See https://developer.android.com/training/permissions/requesting
-////            getLocationPermission();
-//        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            @SuppressLint("MissingPermission") Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
+            placeResponse.addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    FindCurrentPlaceResponse response = task.getResult();
+                    for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
+                        Toast.makeText(this, String.format
+                                ("Place '%s', address '%s', Id '%s' has likelihood: %f",
+                                placeLikelihood.getPlace().getName(),
+                                placeLikelihood.getPlace().getAddress(),
+                                placeLikelihood.getPlace().getId(),
+                                placeLikelihood.getLikelihood()), Toast.LENGTH_SHORT)
+                                .show();
+                        Log.i(TAG, String.format("Place '%s' has likelihood: %f",
+                                placeLikelihood.getPlace().getName(),
+                                placeLikelihood.getLikelihood()));
+                    }
+                } else {
+                    Exception exception = task.getException();
+                    if (exception instanceof ApiException) {
+                        ApiException apiException = (ApiException) exception;
+                        Log.e(TAG, "Place not found: " + apiException.getStatusCode());
+                    }
+                }
+            });
+        } else {
+            // A local method to request required permissions;
+            // See https://developer.android.com/training/permissions/requesting
+//            getLocationPermission();
+        }
     }
 
     public void add_marker_to_map(LatLng marker_location, String title,
