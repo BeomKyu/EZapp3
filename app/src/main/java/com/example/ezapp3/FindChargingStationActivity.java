@@ -6,39 +6,41 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Looper;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.location.CurrentLocationRequest;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
+import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
+import com.google.android.libraries.places.api.net.PlacesClient;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class FindChargingStationActivity extends AppCompatActivity
         implements GoogleMap.OnMyLocationButtonClickListener,
@@ -48,12 +50,19 @@ public class FindChargingStationActivity extends AppCompatActivity
         ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final String TAG = "Check";
 
     private boolean permissionDenied = false;
 
     private GoogleMap map;
 
     private FusedLocationProviderClient fusedLocationClient;
+
+    List<Place.Field> placeFields = Collections.singletonList(Place.Field.NAME);
+
+    FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
+
+    PlacesClient placesClient = Places.createClient(this);
 
     Button APIbtn;
 
@@ -74,9 +83,7 @@ public class FindChargingStationActivity extends AppCompatActivity
         add_marker_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add_marker_to_map(new LatLng(37.4962, 126.9569),
-                        "서울특별시 동작구 상도로 369 서울특별시 동작구 전기차 충전소",
-                        "1522-1782,24시간 이용가능,한국전기차충전서비스,무료");
+                search_around_charging_station();
             }
         });
 
@@ -90,6 +97,36 @@ public class FindChargingStationActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    public void search_around_charging_station(){
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//            @SuppressLint("MissingPermission") Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
+//            placeResponse.addOnCompleteListener(task -> {
+//                if (task.isSuccessful()){
+//                    FindCurrentPlaceResponse response = task.getResult();
+//                    for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
+//                        Toast.makeText(this, String.format("Place '%s' has likelihood: %f",
+//                                placeLikelihood.getPlace().getName(),
+//                                placeLikelihood.getLikelihood()), Toast.LENGTH_SHORT)
+//                                .show();
+//                        Log.i(TAG, String.format("Place '%s' has likelihood: %f",
+//                                placeLikelihood.getPlace().getName(),
+//                                placeLikelihood.getLikelihood()));
+//                    }
+//                } else {
+//                    Exception exception = task.getException();
+//                    if (exception instanceof ApiException) {
+//                        ApiException apiException = (ApiException) exception;
+//                        Log.e(TAG, "Place not found: " + apiException.getStatusCode());
+//                    }
+//                }
+//            });
+//        } else {
+//            // A local method to request required permissions;
+//            // See https://developer.android.com/training/permissions/requesting
+////            getLocationPermission();
+//        }
     }
 
     public void add_marker_to_map(LatLng marker_location, String title,
