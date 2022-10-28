@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -35,9 +36,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.model.RectangularBounds;
+import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -60,7 +65,7 @@ public class FindChargingStationActivity extends AppCompatActivity
     private FusedLocationProviderClient fusedLocationClient;
 
     List<Place.Field> placeFields = Arrays.asList(
-            Place.Field.NAME, Place.Field.ADDRESS, Place.Field.ID);
+            Place.Field.NAME, Place.Field.ADDRESS, Place.Field.ID, Place.Field.LAT_LNG);
 
     FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
 
@@ -75,7 +80,7 @@ public class FindChargingStationActivity extends AppCompatActivity
         setContentView(R.layout.activity_find_charging_station);
 
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_marker_btn);
-        APIbtn = findViewById(R.id.APIDatabtn);
+//        APIbtn = findViewById(R.id.APIDatabtn);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.google_map);
@@ -93,13 +98,45 @@ public class FindChargingStationActivity extends AppCompatActivity
             }
         });
 
-        APIbtn.setOnClickListener(new View.OnClickListener() {
+        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(placeFields);
+//        autocompleteFragment.setTypeFilter(TypeFilter.ADDRESS);
+//        autocompleteFragment.setLocationRestriction(RectangularBounds.newInstance(
+//                new LatLng(39, 124),
+//                new LatLng(33, 132)));
+        autocompleteFragment.setCountries("KR");
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), APISempleActivity.class);
-                startActivity(intent);
+            public void onPlaceSelected(@NonNull Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 17));
+                Toast.makeText(getApplicationContext(),
+                        String.format("Place '%s', address '%s', Id '%s'",
+                                place.getName(), place.getAddress(), place.getId()),
+                        Toast.LENGTH_SHORT).show();
+            }
+
+
+            @Override
+            public void onError(@NonNull Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
             }
         });
+
+//        APIbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), APISempleActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 
@@ -234,7 +271,7 @@ public class FindChargingStationActivity extends AppCompatActivity
                     return;
                 for(Location myLocation:locationResult.getLocations()){
                     LatLng myLatLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 25));
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 17));
                     fusedLocationClient.removeLocationUpdates(this);
                 }
             }
