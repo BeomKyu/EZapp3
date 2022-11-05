@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -43,6 +44,8 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -73,6 +76,8 @@ public class FindChargingStationActivity extends AppCompatActivity
 
     Button APIbtn;
 
+    BottomNavigationView bottomNavigationView;
+
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +86,31 @@ public class FindChargingStationActivity extends AppCompatActivity
 
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_marker_btn);
 //        APIbtn = findViewById(R.id.APIDatabtn);
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.favorites_button:
+                        Toast.makeText(getApplicationContext(), "favorites",
+                                Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.home_button:
+                        Toast.makeText(getApplicationContext(), "home",
+                                Toast.LENGTH_SHORT).show();
+                        return true;
+
+                    case R.id.profile_button:
+                        Toast.makeText(getApplicationContext(), "profile",
+                                Toast.LENGTH_SHORT).show();
+                        return true;
+                }
+                return false;
+            }
+        });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.google_map);
