@@ -85,7 +85,7 @@ public class FindChargingStationActivity extends AppCompatActivity
         setContentView(R.layout.activity_find_charging_station);
 
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_marker_btn);
-//        APIbtn = findViewById(R.id.APIDatabtn);
+        APIbtn = findViewById(R.id.APIDatabtn);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
@@ -151,8 +151,6 @@ public class FindChargingStationActivity extends AppCompatActivity
                                 place.getName(), place.getAddress(), place.getId()),
                         Toast.LENGTH_SHORT).show();
             }
-
-
             @Override
             public void onError(@NonNull Status status) {
                 // TODO: Handle the error.
@@ -160,13 +158,13 @@ public class FindChargingStationActivity extends AppCompatActivity
             }
         });
 
-//        APIbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), APISempleActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        APIbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), APISempleActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

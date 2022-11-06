@@ -40,12 +40,11 @@
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     />
 
-<!--                <Button-->
-<!--                    android:id="@+id/APIDatabtn"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="190dp"-->
-<!--                    android:text="APIDAta"/>-->
+                <Button
+                    android:id="@+id/APIDatabtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="APIDAta"/>
 
             </LinearLayout>
 
