@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/staname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="충전소이름"/>
+
+        <TextView
+            android:id="@+id/chgerType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="충전타입"/>
+
+        <TextView
+            android:id="@+id/addr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주소"/>
+
+        <TextView
+            android:id="@+id/useTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사용시간"/>
+
+        <TextView
+            android:id="@+id/stat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상태"/>
+
+        <TextView
+            android:id="@+id/statUpdDt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="마지막사용시간"/>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
