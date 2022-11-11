@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tips">
+        <item>2022년\n전기차 보조금 총정리</item>
+        <item>전기차 급속충전기\n이용방법 정리</item>
+        <item>2022년 기준\n국산 전기차 주행방법</item>
+        <item>한국계 미 의원 앤디 김\n\"한국산 전기차 보조금\n차별 해소 모색\"</item>
+        <item>무공해차 통합누리집</item>
+        <item>환경부"</item>
+    </string-array>
+
+    <string-array name="urls">
+        <item>https://www.google.co.kr</item>
+        <item>https://www.google.co.kr</item>
+        <item>https://www.google.co.kr</item>
+        <item>https://www.google.co.kr</item>
+        <item>https://ev.or.kr</item>
+        <item>http://www.me.go.kr</item>
+    </string-array>
+</resources>
