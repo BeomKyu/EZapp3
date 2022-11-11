@@ -94,18 +94,24 @@ public class FindChargingStationActivity extends AppCompatActivity
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.favorites_button:
+//                        Intent intent1 = new Intent(getApplicationContext(), com.example.ezapp3.FindChargingStationActivity.class);
+//                        startActivity(intent1);
                         Toast.makeText(getApplicationContext(), "favorites",
                                 Toast.LENGTH_SHORT).show();
                         return true;
 
                     case R.id.home_button:
-                        Toast.makeText(getApplicationContext(), "home",
-                                Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(getApplicationContext(), com.example.ezapp3.MainActivity.class);
+                        startActivity(intent2);
+//                        Toast.makeText(getApplicationContext(), "홈 화면 입니다.",
+//                                Toast.LENGTH_SHORT).show();
                         return true;
 
                     case R.id.profile_button:
-                        Toast.makeText(getApplicationContext(), "profile",
-                                Toast.LENGTH_SHORT).show();
+                        Intent intent3 = new Intent(getApplicationContext(), com.example.ezapp3.ElectricVehicleTips.class);
+                        startActivity(intent3);
+//                        Toast.makeText(getApplicationContext(), "정보 화면 입니다.",
+//                                Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return false;
