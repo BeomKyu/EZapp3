@@ -55,6 +55,7 @@ public class APISempleActivity extends AppCompatActivity {
 
                                 for(int i = 0; i < placList.length; i++){
                                     place = placList[i].split("\n\n");
+                                    Log.i("MyT", placList[i]);
                                     try {
                                         adapter.addItem(new PlaceItem(place[0],place[1],place[2],place[3],place[4],place[5]));
                                     }catch (Exception e){

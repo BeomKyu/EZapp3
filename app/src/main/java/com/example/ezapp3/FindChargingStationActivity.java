@@ -182,6 +182,8 @@ public class FindChargingStationActivity extends AppCompatActivity
     }
 
     public void search_around_charging_station(){
+        APITask apiTask = new APITask();
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             @SuppressLint("MissingPermission") Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
             placeResponse.addOnCompleteListener(task -> {
@@ -199,6 +201,7 @@ public class FindChargingStationActivity extends AppCompatActivity
                                 placeLikelihood.getPlace().getName(),
                                 placeLikelihood.getLikelihood()));*/
                         addr[0] = placeLikelihood.getPlace().getAddress();
+                        apiTask.setNowPlace(addr[0]);
                         break;
                     }
                 } else {
@@ -214,7 +217,7 @@ public class FindChargingStationActivity extends AppCompatActivity
             // See https://developer.android.com/training/permissions/requesting
 //            getLocationPermission();
         }
-        APITask apiTask = new APITask();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -230,10 +233,11 @@ public class FindChargingStationActivity extends AppCompatActivity
                     public void run() {
                         // TODO Auto-generated method stub
                         placList = nowPlace.split("\n\n\n");
-
+                        //0 ~ 6 :  충전소명, 충전소 타입, 주소, let, lng, 이용시간, 충전기상태, 상태갱신
                         for(int i = 0; i < placList.length; i++){
                             place = placList[i].split("\n\n");
                             latLng = new LatLng(Double.parseDouble(place[3]), Double.parseDouble(place[4]));
+                            Log.i("MyTag", place[0]);
                             add_marker_to_map(latLng, place[0], placList[i]);
                         }
 
@@ -241,8 +245,6 @@ public class FindChargingStationActivity extends AppCompatActivity
                 });
             }
         }).start();
-
-
 
     }
 

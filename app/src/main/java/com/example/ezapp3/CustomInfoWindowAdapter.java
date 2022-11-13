@@ -31,7 +31,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
                 null);
 
         String infomationString = marker.getSnippet();
-        String[] infomationSplit = infomationString.split(",");
+        String[] infomationSplit = infomationString.split("\n\n");
 
         TextView tvNumber = (TextView) view.findViewById(R.id.call_number);
         TextView tvFee = (TextView) view.findViewById(R.id.fee);
