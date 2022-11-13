@@ -1,5 +1,7 @@
 package com.example.ezapp3;
 
+import android.util.Log;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -11,17 +13,21 @@ import java.net.URLEncoder;
 
 public class APITask {
     String key = "Ic5dcu4eL2UZQRsdDj3p55zppwYcrBsdAFGjlD38oyGp0KLkJwTq9aUIVPosX%2BzGgRkkof%2Bro27sFdYebgGQgg%3D%3D";
+    String nowZcode = "11";
+    String nowZscode = "590";
 
     public String getAPIData() throws IOException {
         StringBuffer buffer=new StringBuffer();
+        Log.i("Myzcode", nowZcode);
+        Log.i("Myzscode", nowZscode);
 
         //API문서를 통해서 요청하고싶은 항목을 urlBuilder.append()로 추가하면됨
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552584/EvCharger/getChargerInfo"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + key); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수 (최소 10, 최대 9999)*/
-        urlBuilder.append("&" + URLEncoder.encode("zcode","UTF-8") + "=" + URLEncoder.encode("11", "UTF-8")); /*시도 코드 (행정구역코드 앞 2자리)*/
-        urlBuilder.append("&" + URLEncoder.encode("zscode", "UTF-8") + "=" + URLEncoder.encode("11230", "UTF-8")); /*시도 상세코드 (행정구역코드 5자리)*/
+        urlBuilder.append("&" + URLEncoder.encode("zcode","UTF-8") + "=" + URLEncoder.encode(nowZcode, "UTF-8")); /*시도 코드 (행정구역코드 앞 2자리)*/
+        urlBuilder.append("&" + URLEncoder.encode("zscode", "UTF-8") + "=" + URLEncoder.encode(nowZcode + nowZscode, "UTF-8")); /*시도 상세코드 (행정구역코드 5자리)*/
 
         try {
             URL url= new URL(urlBuilder.toString());//문자열로 된 요청 url을 URL 객체로 생성.
@@ -61,6 +67,14 @@ public class APITask {
                             xpp.next();
                             buffer.append(xpp.getText());
                             buffer.append("\n\n");
+                        }else if(tag.equals("lat")){
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }else if(tag.equals("lng")){
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
                         }
                         else if(tag.equals("useTime")) {
                             buffer.append("이용가능시간 : ");
@@ -96,5 +110,23 @@ public class APITask {
             // TODO Auto-generated catch blocke.printStackTrace();
         }
         return  buffer.toString();
+    }
+
+    public void setNowPlace(String nowPlace){
+        String Plce[];
+        Plce = nowPlace.split(" ");
+        Log.i("Myaddr", Plce[1] + Plce[2]);
+        if(Plce[1].equals("서울특별시")){
+            nowZcode = "11";
+        }else {
+            nowZcode = "11";
+        }
+
+        if(Plce[2].equals("동작구")){
+            nowZscode = "590";
+        }else {
+            nowZscode = "200";
+        }
+
     }
 }

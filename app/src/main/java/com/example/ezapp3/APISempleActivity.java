@@ -59,7 +59,6 @@ public class APISempleActivity extends AppCompatActivity {
                                         adapter.addItem(new PlaceItem(place[0],place[1],place[2],place[3],place[4],place[5]));
                                     }catch (Exception e){
                                         Log.i("MyTag", e.getMessage());
-                                        Log.i("MyTag", place[0].toString());
                                     }
                                 }
 
