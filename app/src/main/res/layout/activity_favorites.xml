@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".FavoritesActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="68dp"
+            android:background="@drawable/rectiangle"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:text="즐겨찾기한 항목"
+                android:textSize="30dp"
+                android:textColor="#227106">
+            </TextView>
+
+            <TableLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:background="@drawable/rectiangle">
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1">
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="+"
+                        android:textColor="#227106"
+                        android:textSize="30dp"
+                        android:gravity="center"
+                        android:id="@+id/tableTextView1"/>
+                    <View
+                        android:layout_height="match_parent"
+                        android:layout_width="1dp"
+                        android:background="#227106">
+                    </View>
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="+"
+                        android:textColor="#227106"
+                        android:textSize="30dp"
+                        android:gravity="center"
+                        android:id="@+id/tableTextView2"/>
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#227106">
+                </View>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1">
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="+"
+                        android:textColor="#227106"
+                        android:textSize="30dp"
+                        android:gravity="center"
+                        android:id="@+id/tableTextView3"/>
+                    <View
+                        android:layout_height="match_parent"
+                        android:layout_width="1dp"
+                        android:background="#227106">
+                    </View>
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="+"
+                        android:textColor="#227106"
+                        android:textSize="30dp"
+                        android:gravity="center"
+                        android:id="@+id/tableTextView4"/>
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#227106">
+                </View>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1">
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="+"
+                        android:textColor="#227106"
+                        android:textSize="30dp"
+                        android:gravity="center"
+                        android:id="@+id/tableTextView5"/>
+                    <View
+                        android:layout_height="match_parent"
+                        android:layout_width="1dp"
+                        android:background="#227106">
+                    </View>
+                    <TextView android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="+"
+                        android:textColor="#227106"
+                        android:textSize="30dp"
+                        android:gravity="center"
+                        android:id="@+id/tableTextView6"/>
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="즐겨찾기"
+            android:textSize="25dp"
+            android:background="#ffffff"
+            android:textColor="#227106">
+        </TextView>
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_margin="8dp"
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectiangle"
+        app:itemIconTint="#227106"
+        app:itemTextColor="#227106"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,8 +35,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.favorites_button:
-                        Toast.makeText(getApplicationContext(), "favorites",
-                                Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "favorites",
+                                //Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), com.example.ezapp3.FavoritesActivity.class);
+                        startActivity(intent);
                         return true;
 
                     case R.id.home_button:
