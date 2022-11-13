@@ -14,27 +14,35 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="320dp"
+            android:background="@drawable/rectiangle"
             android:orientation="vertical"
-            android:layout_marginTop="8dp">
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp">
 
-            <Button
-                android:id="@+id/electirc_vehicle_tips_button1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:background="@drawable/rectiangle"
-                android:textSize="20dp"
-                android:text="[전기차 이용 팁 모음]"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
                 android:textColor="#227106"
-                />
+                android:text="[전기차 이용 팁 모음]"
+                android:textSize="20dp" />
 
             <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:src="@drawable/unnamed"
-                android:id="@+id/electirc_vehicle_tips_button2" />
-
+                android:id="@+id/electirc_vehicle_tips_button1"
+                android:layout_width="370dp"
+                android:layout_height="235dp"
+                android:gravity="center"
+                android:background="#e8fbe2"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/main_banner"
+                android:textColor="#227106"
+                />
 
         </LinearLayout>
 
@@ -51,8 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="[전기차 충전소 찾기]"
                 android:textColor="#227106"
+                android:text="[전기차 충전소 찾기]"
                 android:textSize="20dp"
                 android:layout_marginTop="8dp"/>
 
@@ -66,20 +74,25 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_margin="8dp"
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectiangle"
+            app:itemIconTint="#227106"
+            app:itemTextColor="#227106"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottom_menu"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_margin="8dp"
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rectiangle"
-        app:itemIconTint="#227106"
-        app:itemTextColor="#227106"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu"/>
+
+
+
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ImageButton myFindChargingStation =(ImageButton) findViewById(R.id.find_charging_station_button);
-        Button myElectricVehicleTips1 =(Button) findViewById(R.id.electirc_vehicle_tips_button1);
-        ImageButton myElectricVehicleTips2 =(ImageButton) findViewById(R.id.electirc_vehicle_tips_button2);
+        ImageButton myElectricVehicleTips1 =(ImageButton) findViewById(R.id.electirc_vehicle_tips_button1);
+//        ImageButton myElectricVehicleTips2 =(ImageButton) findViewById(R.id.electirc_vehicle_tips_button2);
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);

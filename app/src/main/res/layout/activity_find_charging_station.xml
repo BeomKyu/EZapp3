@@ -23,27 +23,21 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="38dp"
                 android:background="@drawable/half_rectiangle"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/half_rectiangle"
-                    android:text=" 충전소찾기"
-                    android:textColor="#227106"
-                    android:textSize="25dp"/>
                 <fragment android:id="@+id/autocomplete_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     />
-
                 <Button
                     android:id="@+id/APIDatabtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="#57A65A"
                     android:text="APIDAta"/>
 
             </LinearLayout>
@@ -53,18 +47,63 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:id="@+id/google_map"
                 android:layout_width="match_parent"
-                android:layout_height="500dp" />
+                android:layout_height="530dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="75dp"
+                android:layout_marginTop="-75dp"
+                android:background="@drawable/round_layout">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/add_near_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_near_logo" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="#227106"
+                        android:textSize="15dp"
+                        android:layout_marginTop="6dp"
+                        android:text="[가까운 충전소]">
+                    </TextView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/type_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_vector"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="6dp"
+                        android:textColor="#227106"
+                        android:textSize="15dp"
+                        android:text="[타입별 충전소]">
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/add_marker_btn"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_information"
-            android:background="@drawable/rectiangle"/>
 
     </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView

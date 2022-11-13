@@ -84,7 +84,8 @@ public class FindChargingStationActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_charging_station);
 
-        ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_marker_btn);
+        ImageButton near_btn = (ImageButton) findViewById(R.id.add_near_btn);
+        ImageButton type_btn = (ImageButton) findViewById(R.id.type_btn);
         APIbtn = findViewById(R.id.APIDatabtn);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -127,10 +128,17 @@ public class FindChargingStationActivity extends AppCompatActivity
         Places.initialize(this, BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(this);
 
-        add_marker_btn.setOnClickListener(new View.OnClickListener() {
+        near_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 search_around_charging_station();
+            }
+        });
+
+        type_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -144,6 +152,7 @@ public class FindChargingStationActivity extends AppCompatActivity
 //                new LatLng(39, 124),
 //                new LatLng(33, 132)));
         autocompleteFragment.setCountries("KR");
+        autocompleteFragment.setHint("Search ChargingStation");
 
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
@@ -183,10 +192,10 @@ public class FindChargingStationActivity extends AppCompatActivity
                     for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
                         Toast.makeText(this, String.format
                                 ("Place '%s', address '%s', Id '%s' has likelihood: %f",
-                                placeLikelihood.getPlace().getName(),
-                                placeLikelihood.getPlace().getAddress(),
-                                placeLikelihood.getPlace().getId(),
-                                placeLikelihood.getLikelihood()), Toast.LENGTH_SHORT)
+                                        placeLikelihood.getPlace().getName(),
+                                        placeLikelihood.getPlace().getAddress(),
+                                        placeLikelihood.getPlace().getId(),
+                                        placeLikelihood.getLikelihood()), Toast.LENGTH_SHORT)
                                 .show();
                         Log.i(TAG, String.format("Place '%s' has likelihood: %f",
                                 placeLikelihood.getPlace().getName(),
@@ -247,9 +256,9 @@ public class FindChargingStationActivity extends AppCompatActivity
     @SuppressLint("MissingPermission")
     private void enableMyLocation() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-        == PackageManager.PERMISSION_GRANTED
-        || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-        == PackageManager.PERMISSION_GRANTED) {
+                == PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
 
 //            moved_last_location();
@@ -263,7 +272,7 @@ public class FindChargingStationActivity extends AppCompatActivity
     }
 
     /*
-    *   가장 최근의 위치 받아오는 함수
+     *   가장 최근의 위치 받아오는 함수
      */
 
     @SuppressLint("MissingPermission")
@@ -287,9 +296,9 @@ public class FindChargingStationActivity extends AppCompatActivity
                 });
     }
 
-/*
-*   최신의 현재위치 받아오는 함수
- */
+    /*
+     *   최신의 현재위치 받아오는 함수
+     */
     @SuppressLint("MissingPermission")
     private void search_current_place(){
         LocationRequest locationRequest = LocationRequest.create()
