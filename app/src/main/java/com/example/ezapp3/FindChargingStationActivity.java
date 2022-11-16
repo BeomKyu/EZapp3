@@ -2,6 +2,7 @@ package com.example.ezapp3;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -48,6 +50,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -57,7 +60,7 @@ public class FindChargingStationActivity extends AppCompatActivity
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback{
 
     String nowPlace;
     String placList[];
@@ -83,6 +86,12 @@ public class FindChargingStationActivity extends AppCompatActivity
 
     Button APIbtn;
 
+    //충전기 타입 다이얼로그
+    ImageButton type_btn;
+    List<String> mSelectedItems;
+    AlertDialog.Builder typeDialog;
+    boolean type_boolean[] = new boolean[6];
+
     BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingPermission")
@@ -92,9 +101,18 @@ public class FindChargingStationActivity extends AppCompatActivity
         setContentView(R.layout.activity_find_charging_station);
 
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_near_btn);
+        type_btn = (ImageButton) findViewById(R.id.type_btn);
         APIbtn = findViewById(R.id.APIDatabtn);
+        type_boolean[1] = true; type_boolean[2] = true;
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        type_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -179,6 +197,49 @@ public class FindChargingStationActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    public void showDialog(){
+
+        mSelectedItems = new ArrayList<String>();
+        typeDialog = new AlertDialog.Builder(this);
+        typeDialog.setTitle("타입을 선택해 주세요");
+        typeDialog.setMultiChoiceItems(R.array.types, type_boolean, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
+                String[] items = getResources().getStringArray(R.array.types);
+                if(isChecked){
+                    mSelectedItems.add(items[which]);
+                    type_boolean[which] = true;
+                }else if(mSelectedItems.contains(items[which])){
+                    mSelectedItems.remove(items[which]);
+                    type_boolean[which] = false;
+                }
+            }
+        });
+
+        typeDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+//                for(int j = 0; j < 6; j++){
+//                    Toast.makeText(getApplicationContext(), j+" "+b[j], Toast.LENGTH_SHORT).show();
+//                }
+
+//                for(String item : mSelectedItems){
+//                    final_selection = final_selection + "\n" + item;
+//                }
+            }
+        });
+
+        typeDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        AlertDialog alertDialog = typeDialog.create();
+        alertDialog.show();
     }
 
     public void search_around_charging_station(){
