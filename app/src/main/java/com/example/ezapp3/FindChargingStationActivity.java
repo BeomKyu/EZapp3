@@ -177,10 +177,11 @@ public class FindChargingStationActivity extends AppCompatActivity
                 // TODO: Get info about the selected place.
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 17));
-                Toast.makeText(getApplicationContext(),
-                        String.format("Place '%s', address '%s', Id '%s'",
-                                place.getName(), place.getAddress(), place.getId()),
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),
+//                        String.format("Place '%s', address '%s', Id '%s'",
+//                                place.getName(), place.getAddress(), place.getId()),
+//                        Toast.LENGTH_SHORT).show();
+                String [] a = return_regional_code(place.getAddress());
             }
             @Override
             public void onError(@NonNull Status status) {
@@ -242,6 +243,49 @@ public class FindChargingStationActivity extends AppCompatActivity
         alertDialog.show();
     }
 
+    public String[] return_regional_code(String address){
+        String[] regional_code = new String[2];
+        String[] regional_items = getResources().getStringArray(R.array.regional_name);
+        String[] regional_code_items = getResources().getStringArray(R.array.regional_code);
+
+        int i = 0;
+        while(!address.contains(regional_items[i]) && i < regional_items.length){
+//            Toast.makeText(this, regional_items[i], Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, regional_code_items[i], Toast.LENGTH_SHORT).show();
+            i++;
+        }
+        if(i >= regional_items.length) {
+            Toast.makeText(this, "다시 검색해 주세요.", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+        regional_code[0] = regional_code_items[i];
+
+        int detailCodeId = getResources().getIdentifier("regional_detail_code_"
+                        + regional_code_items[i], "array", getPackageName());
+        int detailAddrId = getResources().getIdentifier("regional_detail_name_"
+                        + regional_code_items[i], "array", getPackageName());
+        String[] regional_details_code_items = getResources().getStringArray(detailCodeId);
+        String[] regional_details_items = getResources().getStringArray(detailAddrId);
+
+        i = 0;
+        while(!address.contains(regional_details_items[i]) && i < regional_details_code_items.length){
+//            Toast.makeText(this, regional_items[i], Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, regional_details_code_items[i], Toast.LENGTH_SHORT).show();
+            i++;
+        }
+
+        if(i >= regional_details_items.length) {
+            return regional_code;
+//            Toast.makeText(this, "다시 검색해 주세요.", Toast.LENGTH_SHORT).show();
+        }
+
+        regional_code[1] = regional_details_code_items[i];
+//        Toast.makeText(this, regional_code[0], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, regional_code[1], Toast.LENGTH_SHORT).show();
+
+        return regional_code;
+    }
+
     public void search_around_charging_station(){
         APITask apiTask = new APITask();
 
@@ -250,21 +294,10 @@ public class FindChargingStationActivity extends AppCompatActivity
             placeResponse.addOnCompleteListener(task -> {
                 if (task.isSuccessful()){
                     FindCurrentPlaceResponse response = task.getResult();
-                    for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                        /*Toast.makeText(this, String.format
-                                ("Place '%s', address '%s', Id '%s' has likelihood: %f",
-                                placeLikelihood.getPlace().getName(),
-                                placeLikelihood.getPlace().getAddress(),
-                                placeLikelihood.getPlace().getId(),
-                                placeLikelihood.getLikelihood()), Toast.LENGTH_SHORT)
-                                .show();
-                        Log.i(TAG, String.format("Place '%s' has likelihood: %f",
-                                placeLikelihood.getPlace().getName(),
-                                placeLikelihood.getLikelihood()));*/
-                        addr[0] = placeLikelihood.getPlace().getAddress();
-                        apiTask.setNowPlace(addr[0]);
-                        break;
-                    }
+                    List<PlaceLikelihood> placeLikelihood = response.getPlaceLikelihoods();
+                    addr[0] = placeLikelihood.get(0).getPlace().getAddress();
+
+                    apiTask.setNowPlace(return_regional_code(addr[0]));
                 } else {
                     Exception exception = task.getException();
                     if (exception instanceof ApiException) {

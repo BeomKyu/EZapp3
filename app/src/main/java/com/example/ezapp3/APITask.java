@@ -1,5 +1,6 @@
 package com.example.ezapp3;
 
+import android.content.res.Resources;
 import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -10,6 +11,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
+
+
 
 public class APITask {
     String key = "Ic5dcu4eL2UZQRsdDj3p55zppwYcrBsdAFGjlD38oyGp0KLkJwTq9aUIVPosX%2BzGgRkkof%2Bro27sFdYebgGQgg%3D%3D";
@@ -112,22 +115,22 @@ public class APITask {
         return  buffer.toString();
     }
 
-    public void setNowPlace(String nowPlace){
-        String Plce[];
-        Plce = nowPlace.split(" ");
-        Log.i("Myaddr", Plce[1] + Plce[2]);
-
-        if(Plce[1].equals("서울특별시")){
-            nowZcode = "11";
-        }else {
-            nowZcode = "11";
+    public void setNowPlace(String[] nowPlace){
+//        String Plce[];
+//        Plce = nowPlace.split(" ");
+//        Log.i("Myaddr", Plce[1] + Plce[2]);
+        Log.i("Myaddr", nowPlace[0] + nowPlace[1]);
+        if(!(nowPlace[0] == null)){
+            nowZcode = nowPlace[0];
+        }else{
+            nowZcode = null;
         }
-
-        if(Plce[2].equals("동작구")){
-            nowZscode = "590";
-        }else {
-            nowZscode = "200";
+        if(!(nowPlace[1] == null)){
+            nowZscode = nowPlace[1];
+        }else{
+            nowZscode = null;
         }
 
     }
+
 }
