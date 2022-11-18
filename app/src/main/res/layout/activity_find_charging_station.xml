@@ -22,23 +22,16 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:background="@drawable/half_rectiangle"
                 android:orientation="horizontal">
 
                 <fragment android:id="@+id/autocomplete_fragment"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     />
-                <Button
-                    android:id="@+id/APIDatabtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="#57A65A"
-                    android:text="APIDAta"/>
 
             </LinearLayout>
 

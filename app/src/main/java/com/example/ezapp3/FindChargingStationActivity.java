@@ -84,8 +84,6 @@ public class FindChargingStationActivity extends AppCompatActivity
 
     PlacesClient placesClient;
 
-    Button APIbtn;
-
     //충전기 타입 다이얼로그
     ImageButton type_btn;
     List<String> mSelectedItems;
@@ -104,7 +102,6 @@ public class FindChargingStationActivity extends AppCompatActivity
 
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_near_btn);
         type_btn = (ImageButton) findViewById(R.id.type_btn);
-        APIbtn = findViewById(R.id.APIDatabtn);
         type_boolean[1] = true; type_boolean[2] = true;
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -219,14 +216,6 @@ public class FindChargingStationActivity extends AppCompatActivity
             public void onError(@NonNull Status status) {
                 // TODO: Handle the error.
                 Log.i(TAG, "An error occurred: " + status);
-            }
-        });
-
-        APIbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), APISempleActivity.class);
-                startActivity(intent);
             }
         });
 
