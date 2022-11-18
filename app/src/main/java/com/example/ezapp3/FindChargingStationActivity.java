@@ -298,6 +298,34 @@ public class FindChargingStationActivity extends AppCompatActivity
                     addr[0] = placeLikelihood.get(0).getPlace().getAddress();
 
                     apiTask.setNowPlace(return_regional_code(addr[0]));
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // TODO Auto-generated method stub
+
+                            try {
+                                nowPlace = apiTask.getAPIData();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // TODO Auto-generated method stub
+                                    placList = nowPlace.split("\n\n\n");
+                                    //0 ~ 6 :  충전소명, 충전소 타입, 주소, let, lng, 이용시간, 충전기상태, 상태갱신
+                                    for(int i = 0; i < placList.length; i++){
+                                        place = placList[i].split("\n\n");
+                                        latLng = new LatLng(Double.parseDouble(place[3]), Double.parseDouble(place[4]));
+                                        Log.i("MyTag", place[0]);
+                                        add_marker_to_map(latLng, place[0], placList[i]);
+                                    }
+
+                                }
+                            });
+                        }
+                    }).start();
                 } else {
                     Exception exception = task.getException();
                     if (exception instanceof ApiException) {
@@ -312,33 +340,6 @@ public class FindChargingStationActivity extends AppCompatActivity
 //            getLocationPermission();
         }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-
-                try {
-                    nowPlace = apiTask.getAPIData();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        placList = nowPlace.split("\n\n\n");
-                        //0 ~ 6 :  충전소명, 충전소 타입, 주소, let, lng, 이용시간, 충전기상태, 상태갱신
-                        for(int i = 0; i < placList.length; i++){
-                            place = placList[i].split("\n\n");
-                            latLng = new LatLng(Double.parseDouble(place[3]), Double.parseDouble(place[4]));
-                            Log.i("MyTag", place[0]);
-                            add_marker_to_map(latLng, place[0], placList[i]);
-                        }
-
-                    }
-                });
-            }
-        }).start();
 
     }
 
