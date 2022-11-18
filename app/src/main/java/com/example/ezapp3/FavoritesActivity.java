@@ -29,7 +29,7 @@ public class FavoritesActivity extends AppCompatActivity {
                     case R.id.favorites_button:
 //                        Intent intent1 = new Intent(getApplicationContext(), com.example.ezapp3.FindChargingStationActivity.class);
 //                        startActivity(intent1);
-                        Toast.makeText(getApplicationContext(), "favorites",
+                        Toast.makeText(getApplicationContext(), "즐겨찾기 화면 입니다.",
                                 Toast.LENGTH_SHORT).show();
                         return true;
 
