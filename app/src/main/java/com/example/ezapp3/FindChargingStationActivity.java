@@ -92,6 +92,8 @@ public class FindChargingStationActivity extends AppCompatActivity
     AlertDialog.Builder typeDialog;
     boolean type_boolean[] = new boolean[6];
 
+    APITask searchTask;
+
     BottomNavigationView bottomNavigationView;
 
     @SuppressLint("MissingPermission")
@@ -181,7 +183,37 @@ public class FindChargingStationActivity extends AppCompatActivity
 //                        String.format("Place '%s', address '%s', Id '%s'",
 //                                place.getName(), place.getAddress(), place.getId()),
 //                        Toast.LENGTH_SHORT).show();
-                String [] a = return_regional_code(place.getAddress());
+                searchTask = new APITask();
+                searchTask.setNowPlace(return_regional_code(place.getAddress()));
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+
+                        try {
+                            nowPlace = searchTask.getAPIData();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+                                placList = nowPlace.split("\n\n\n");
+                                String[] chargingPlace;
+                                //0 ~ 6 :  충전소명, 충전소 타입, 주소, let, lng, 이용시간, 충전기상태, 상태갱신
+                                for(int i = 0; i < placList.length; i++){
+                                    chargingPlace = placList[i].split("\n\n");
+                                    latLng = new LatLng(Double.parseDouble(chargingPlace[3]), Double.parseDouble(chargingPlace[4]));
+                                    Log.i("MyTag", chargingPlace[0]);
+                                    add_marker_to_map(latLng, chargingPlace[0], placList[i]);
+                                }
+
+                            }
+                        });
+                    }
+                }).start();
             }
             @Override
             public void onError(@NonNull Status status) {
