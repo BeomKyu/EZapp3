@@ -2,7 +2,9 @@ package com.example.ezapp3;
 
 import android.app.Activity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,21 +35,64 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         String infomationString = marker.getSnippet();
         String[] infomationSplit = infomationString.split("\n\n");
 
-        TextView tvNumber = (TextView) view.findViewById(R.id.call_number);
-        TextView tvFee = (TextView) view.findViewById(R.id.fee);
-        TextView tvWhere = (TextView) view.findViewById(R.id.where);
-        TextView tvTime = (TextView) view.findViewById(R.id.time);
+        Button depart_btn = (Button) view.findViewById(R.id.depart_button);
+        Button via_btn = (Button) view.findViewById(R.id.via_button);
+        Button arrival_btn = (Button) view.findViewById(R.id.arrival_button);
 
+        Button favorite_btn = (Button) view.findViewById(R.id.favorite_button);
+        Button share_btn = (Button) view.findViewById(R.id.share_button);
+        Button edit_btn = (Button) view.findViewById(R.id.edit_button);
+
+        TextView station_address = (TextView) view.findViewById(R.id.station_address);
+        TextView use_time = (TextView) view.findViewById(R.id.use_time);
+        TextView chager_type = (TextView) view.findViewById(R.id.chager_type);
+        TextView chager_Stat = (TextView)view.findViewById(R.id.chager_stat);
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
-//        TextView tvSubTitle = (TextView) view.findViewById(R.id.snippet);
+
+        station_address.setText(infomationSplit[2]);
+        use_time.setText(infomationSplit[5]);
+        chager_type.setText(infomationSplit[1]);
+        chager_Stat.setText(infomationSplit[7]);
 
         tvTitle.setText(marker.getTitle());
-        tvNumber.setText(infomationSplit[0]);
-        tvFee.setText(infomationSplit[3]);
-        tvWhere.setText(infomationSplit[2]);
-        tvTime.setText(infomationSplit[1]);
-//        tvSubTitle.setText(marker.getSnippet());
 
+        depart_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context.getApplicationContext(), "출발버튼", Toast.LENGTH_SHORT).show();
+            }
+        });
+        via_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context.getApplicationContext(), "경유버튼", Toast.LENGTH_SHORT).show();
+            }
+        });
+        arrival_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context.getApplicationContext(), "도착버튼", Toast.LENGTH_SHORT).show();
+            }
+        });
+        favorite_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context.getApplicationContext(), "즐찾버튼", Toast.LENGTH_SHORT).show();
+            }
+        });
+        share_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context.getApplicationContext(), "공유버튼", Toast.LENGTH_SHORT).show();
+            }
+        });
+        edit_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context.getApplicationContext(), "제보버튼", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
+
 }

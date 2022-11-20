@@ -129,31 +129,30 @@
         android:background="#ff7f7f7f"/>
 
     <TextView
-        android:id="@+id/call_number"
+        android:id="@+id/station_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="#ff7f7f7f"/>
+    <TextView
+        android:id="@+id/use_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="#ff7f7f7f"/>
+    <TextView
+        android:id="@+id/chager_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textColor="#ff7f7f7f"/>
+    <TextView
+        android:id="@+id/chager_stat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:textColor="#ff7f7f7f"/>
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:textColor="#ff7f7f7f"/>
 
-    <TextView
-        android:id="@+id/where"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:textColor="#ff7f7f7f"/>
-
-    <TextView
-        android:id="@+id/fee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:textColor="#ff7f7f7f"/>
 
 </LinearLayout>

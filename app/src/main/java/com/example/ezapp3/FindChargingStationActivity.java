@@ -514,9 +514,10 @@ public class FindChargingStationActivity extends AppCompatActivity
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        Toast.makeText(this, "Marker button clicked"
-                + marker.getId() + marker.getPosition(), Toast.LENGTH_SHORT)
-                .show();
+
+//        Toast.makeText(this, "Marker button clicked"
+//                + marker.getId() + marker.getPosition(), Toast.LENGTH_SHORT)
+//                .show();
 
         return false;
     }
