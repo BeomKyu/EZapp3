@@ -32,29 +32,29 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         View view = context.getLayoutInflater().inflate(R.layout.custom_info_contents,
                 null);
 
-        String infomationString = marker.getSnippet();
-        String[] infomationSplit = infomationString.split("\n\n");
-
-        Button depart_btn = (Button) view.findViewById(R.id.depart_button);
-        Button via_btn = (Button) view.findViewById(R.id.via_button);
-        Button arrival_btn = (Button) view.findViewById(R.id.arrival_button);
-
-        Button favorite_btn = (Button) view.findViewById(R.id.favorite_button);
-        Button share_btn = (Button) view.findViewById(R.id.share_button);
-        Button edit_btn = (Button) view.findViewById(R.id.edit_button);
-
-        TextView station_address = (TextView) view.findViewById(R.id.station_address);
-        TextView use_time = (TextView) view.findViewById(R.id.use_time);
-        TextView chager_type = (TextView) view.findViewById(R.id.chager_type);
-        TextView chager_Stat = (TextView)view.findViewById(R.id.chager_stat);
-        TextView tvTitle = (TextView) view.findViewById(R.id.title);
-
-        station_address.setText(infomationSplit[2]);
-        use_time.setText(infomationSplit[5]);
-        chager_type.setText(infomationSplit[1]);
-        chager_Stat.setText(infomationSplit[6]);
-
-        tvTitle.setText(marker.getTitle());
+//        String infomationString = marker.getSnippet();
+//        String[] infomationSplit = infomationString.split("\n\n");
+//
+//        Button depart_btn = (Button) view.findViewById(R.id.depart_button);
+//        Button via_btn = (Button) view.findViewById(R.id.via_button);
+//        Button arrival_btn = (Button) view.findViewById(R.id.arrival_button);
+//
+//        Button favorite_btn = (Button) view.findViewById(R.id.favorite_button);
+//        Button share_btn = (Button) view.findViewById(R.id.share_button);
+//        Button edit_btn = (Button) view.findViewById(R.id.edit_button);
+//
+//        TextView station_address = (TextView) view.findViewById(R.id.station_address);
+//        TextView use_time = (TextView) view.findViewById(R.id.use_time);
+//        TextView chager_type = (TextView) view.findViewById(R.id.chager_type);
+//        TextView chager_Stat = (TextView)view.findViewById(R.id.chager_stat);
+//        TextView tvTitle = (TextView) view.findViewById(R.id.title);
+//
+//        station_address.setText(infomationSplit[2]);
+//        use_time.setText(infomationSplit[5]);
+//        chager_type.setText(infomationSplit[1]);
+//        chager_Stat.setText(infomationSplit[6]);
+//
+//        tvTitle.setText(marker.getTitle());
 
 //        depart_btn.setOnClickListener(new View.OnClickListener() {
 //            @Override

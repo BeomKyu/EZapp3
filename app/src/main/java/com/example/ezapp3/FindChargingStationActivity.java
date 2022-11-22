@@ -410,8 +410,8 @@ public class FindChargingStationActivity extends AppCompatActivity
 
 //        map.setInfoWindowAdapter(null);
 
-//        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this);
-//        map.setInfoWindowAdapter(adapter);
+        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this);
+        map.setInfoWindowAdapter(adapter);
     }
 
     @SuppressLint("MissingPermission")
