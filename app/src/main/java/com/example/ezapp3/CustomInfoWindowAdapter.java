@@ -52,46 +52,46 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         station_address.setText(infomationSplit[2]);
         use_time.setText(infomationSplit[5]);
         chager_type.setText(infomationSplit[1]);
-        chager_Stat.setText(infomationSplit[7]);
+        chager_Stat.setText(infomationSplit[6]);
 
         tvTitle.setText(marker.getTitle());
 
-        depart_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context.getApplicationContext(), "출발버튼", Toast.LENGTH_SHORT).show();
-            }
-        });
-        via_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context.getApplicationContext(), "경유버튼", Toast.LENGTH_SHORT).show();
-            }
-        });
-        arrival_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context.getApplicationContext(), "도착버튼", Toast.LENGTH_SHORT).show();
-            }
-        });
-        favorite_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context.getApplicationContext(), "즐찾버튼", Toast.LENGTH_SHORT).show();
-            }
-        });
-        share_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context.getApplicationContext(), "공유버튼", Toast.LENGTH_SHORT).show();
-            }
-        });
-        edit_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context.getApplicationContext(), "제보버튼", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        depart_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context.getApplicationContext(), "출발버튼", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        via_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context.getApplicationContext(), "경유버튼", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        arrival_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context.getApplicationContext(), "도착버튼", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        favorite_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context.getApplicationContext(), "즐찾버튼", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        share_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context.getApplicationContext(), "공유버튼", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        edit_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(context.getApplicationContext(), "제보버튼", Toast.LENGTH_SHORT).show();
+//            }
+//        });
         return view;
     }
 
