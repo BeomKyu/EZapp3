@@ -88,7 +88,10 @@ public class FindChargingStationActivity extends AppCompatActivity
     ImageButton type_btn;
     List<String> mSelectedItems;
     AlertDialog.Builder typeDialog;
-    boolean type_boolean[] = new boolean[6];
+    boolean type_boolean[] = new boolean[7];
+
+    //마커 배열
+    ArrayList<Marker> markerArrayList = new ArrayList<Marker>();
 
     APITask searchTask;
 
@@ -196,6 +199,7 @@ public class FindChargingStationActivity extends AppCompatActivity
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                delete_allmarker_from_map();
                                 // TODO Auto-generated method stub
                                 placList = nowPlace.split("\n\n\n");
                                 String[] chargingPlace;
@@ -333,6 +337,7 @@ public class FindChargingStationActivity extends AppCompatActivity
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    delete_allmarker_from_map();
                                     // TODO Auto-generated method stub
                                     placList = nowPlace.split("\n\n\n");
                                     //0 ~ 6 :  충전소명, 충전소 타입, 주소, let, lng, 이용시간, 충전기상태, 상태갱신
@@ -365,12 +370,20 @@ public class FindChargingStationActivity extends AppCompatActivity
     }
 
     public void add_marker_to_map(LatLng marker_location, String title, String snippet) {
-        this.map.addMarker(new MarkerOptions()
+        Marker mMarker = this.map.addMarker(new MarkerOptions()
                 .position(marker_location)
                 .title(title)
                 .snippet(snippet));
+        markerArrayList.add(mMarker);
 //        melbourne.showInfoWindow();
 
+    }
+
+    public void delete_allmarker_from_map(){
+        while(!markerArrayList.isEmpty()){
+            markerArrayList.get(0).remove();
+            markerArrayList.remove(0);
+        }
     }
 
     @Override
@@ -392,12 +405,13 @@ public class FindChargingStationActivity extends AppCompatActivity
         map.getUiSettings().setZoomGesturesEnabled(true);
         map.getUiSettings().setScrollGesturesEnabled(true);
 
-
         map.getUiSettings().setTiltGesturesEnabled(false);
         map.getUiSettings().setRotateGesturesEnabled(false);
 
-        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this);
-        map.setInfoWindowAdapter(adapter);
+//        map.setInfoWindowAdapter(null);
+
+//        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this);
+//        map.setInfoWindowAdapter(adapter);
     }
 
     @SuppressLint("MissingPermission")
@@ -515,9 +529,9 @@ public class FindChargingStationActivity extends AppCompatActivity
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
 
-//        Toast.makeText(this, "Marker button clicked"
-//                + marker.getId() + marker.getPosition(), Toast.LENGTH_SHORT)
-//                .show();
+        Toast.makeText(this, "Marker button clicked"
+                + marker.getId() + marker.getTitle(), Toast.LENGTH_SHORT)
+                .show();
 
         return false;
     }
