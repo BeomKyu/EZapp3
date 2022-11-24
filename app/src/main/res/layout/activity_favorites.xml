@@ -41,27 +41,28 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_weight="1">
-                    <TextView android:layout_width="wrap_content"
+                    <Button android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="+"
                         android:textColor="#227106"
                         android:textSize="30dp"
                         android:gravity="center"
-                        android:id="@+id/tableTextView1"/>
+                        android:id="@+id/favoriteButton1"
+                        android:backgroundTint="#e8fbe2" />
                     <View
                         android:layout_height="match_parent"
                         android:layout_width="1dp"
-                        android:background="#227106">
-                    </View>
-                    <TextView android:layout_width="wrap_content"
+                        android:background="#227106"/>
+                    <Button android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="+"
                         android:textColor="#227106"
                         android:textSize="30dp"
                         android:gravity="center"
-                        android:id="@+id/tableTextView2"/>
+                        android:id="@+id/favoriteButton2"
+                        android:backgroundTint="#e8fbe2" />
                 </TableRow>
 
                 <View
@@ -74,27 +75,29 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_weight="1">
-                    <TextView android:layout_width="wrap_content"
+                    <Button android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="+"
                         android:textColor="#227106"
                         android:textSize="30dp"
                         android:gravity="center"
-                        android:id="@+id/tableTextView3"/>
+                        android:id="@+id/favoriteButton3"
+                        android:backgroundTint="#e8fbe2"/>
                     <View
                         android:layout_height="match_parent"
                         android:layout_width="1dp"
                         android:background="#227106">
                     </View>
-                    <TextView android:layout_width="wrap_content"
+                    <Button android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="+"
                         android:textColor="#227106"
                         android:textSize="30dp"
                         android:gravity="center"
-                        android:id="@+id/tableTextView4"/>
+                        android:id="@+id/favoriteButton4"
+                        android:backgroundTint="#e8fbe2"/>
                 </TableRow>
 
                 <View
@@ -107,27 +110,29 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_weight="1">
-                    <TextView android:layout_width="wrap_content"
+                    <Button android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="+"
                         android:textColor="#227106"
                         android:textSize="30dp"
                         android:gravity="center"
-                        android:id="@+id/tableTextView5"/>
+                        android:id="@+id/favoriteButton5"
+                        android:backgroundTint="#e8fbe2" />
                     <View
                         android:layout_height="match_parent"
                         android:layout_width="1dp"
                         android:background="#227106">
                     </View>
-                    <TextView android:layout_width="wrap_content"
+                    <Button android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text="+"
                         android:textColor="#227106"
                         android:textSize="30dp"
                         android:gravity="center"
-                        android:id="@+id/tableTextView6"/>
+                        android:id="@+id/favoriteButton6"
+                        android:backgroundTint="#e8fbe2"/>
                 </TableRow>
 
             </TableLayout>

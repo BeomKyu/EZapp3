@@ -2,6 +2,7 @@ package com.example.ezapp3;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -105,7 +106,8 @@ public class FindChargingStationActivity extends AppCompatActivity
 
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_near_btn);
         type_btn = (ImageButton) findViewById(R.id.type_btn);
-        type_boolean[1] = true; type_boolean[2] = true;
+        get_types(this);
+//        type_boolean[1] = true; type_boolean[2] = true;
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
@@ -225,9 +227,38 @@ public class FindChargingStationActivity extends AppCompatActivity
 
     }
 
+//    private void checked_types(Context context){
+//        for (int i = 0; i < 7; i++) {
+//            if(type_boolean[i]){
+//                type_boolean[i].setText(String.valueOf(i));
+//            }
+//            else{
+//                favorite_btn[i-1].setText(text[i-1]);
+//            }
+//        }
+//        //            PreferenceManager.setString(mContext, "rebuild", "숲속의 작은 이야기");
+//
+//    }
+
+    private void set_types(Context context){
+        for (int i = 0; i < 7; i++) {
+            PreferenceManager.setBoolean(context, "types_boolean" + i, type_boolean[i]);
+            Log.i("myTag", "test" + i + type_boolean[i]);
+        }
+    }
+
+    private void get_types(Context context) {
+        for (int i = 0; i < 7; i++) {
+            type_boolean[i] = PreferenceManager.getBoolean(context, "types_boolean" + i);
+            Log.i("myTag", "test" + i + type_boolean[i]);
+        }
+    }
+
     public void showDialog(){
 
-        mSelectedItems = new ArrayList<String>();
+//        mSelectedItems = new ArrayList<String>();
+//        boolean temp_boolean[] = new boolean[7];
+        int i = 0;
         typeDialog = new AlertDialog.Builder(this);
         typeDialog.setTitle("타입을 선택해 주세요");
         typeDialog.setMultiChoiceItems(R.array.types, type_boolean, new DialogInterface.OnMultiChoiceClickListener() {
@@ -235,10 +266,10 @@ public class FindChargingStationActivity extends AppCompatActivity
             public void onClick(DialogInterface dialogInterface, int which, boolean isChecked) {
                 String[] items = getResources().getStringArray(R.array.types);
                 if(isChecked){
-                    mSelectedItems.add(items[which]);
+//                    mSelectedItems.add(items[which]);
                     type_boolean[which] = true;
                 }else if(mSelectedItems.contains(items[which])){
-                    mSelectedItems.remove(items[which]);
+//                    mSelectedItems.remove(items[which]);
                     type_boolean[which] = false;
                 }
             }
@@ -254,15 +285,16 @@ public class FindChargingStationActivity extends AppCompatActivity
 //                for(String item : mSelectedItems){
 //                    final_selection = final_selection + "\n" + item;
 //                }
+                set_types(getApplicationContext());
             }
         });
 
-        typeDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
+//        typeDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                dialogInterface.cancel();
+//            }
+//        });
 
         AlertDialog alertDialog = typeDialog.create();
         alertDialog.show();
