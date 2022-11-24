@@ -107,7 +107,6 @@ public class FindChargingStationActivity extends AppCompatActivity
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_near_btn);
         type_btn = (ImageButton) findViewById(R.id.type_btn);
         get_types(this);
-//        type_boolean[1] = true; type_boolean[2] = true;
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
@@ -168,10 +167,6 @@ public class FindChargingStationActivity extends AppCompatActivity
 
         // Specify the types of place data to return.
         autocompleteFragment.setPlaceFields(placeFields);
-//        autocompleteFragment.setTypeFilter(TypeFilter.ADDRESS);
-//        autocompleteFragment.setLocationRestriction(RectangularBounds.newInstance(
-//                new LatLng(39, 124),
-//                new LatLng(33, 132)));
         autocompleteFragment.setCountries("KR");
 
         // Set up a PlaceSelectionListener to handle the response.
@@ -181,10 +176,6 @@ public class FindChargingStationActivity extends AppCompatActivity
                 // TODO: Get info about the selected place.
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 17));
-//                Toast.makeText(getApplicationContext(),
-//                        String.format("Place '%s', address '%s', Id '%s'",
-//                                place.getName(), place.getAddress(), place.getId()),
-//                        Toast.LENGTH_SHORT).show();
                 searchTask = new APITask();
                 searchTask.setNowPlace(return_regional_code(place.getAddress()));
 
@@ -226,19 +217,6 @@ public class FindChargingStationActivity extends AppCompatActivity
         });
 
     }
-
-//    private void checked_types(Context context){
-//        for (int i = 0; i < 7; i++) {
-//            if(type_boolean[i]){
-//                type_boolean[i].setText(String.valueOf(i));
-//            }
-//            else{
-//                favorite_btn[i-1].setText(text[i-1]);
-//            }
-//        }
-//        //            PreferenceManager.setString(mContext, "rebuild", "숲속의 작은 이야기");
-//
-//    }
 
     private void set_types(Context context){
         for (int i = 0; i < 7; i++) {
