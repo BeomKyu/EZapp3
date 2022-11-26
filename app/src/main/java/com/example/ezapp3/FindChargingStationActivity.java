@@ -90,6 +90,8 @@ public class FindChargingStationActivity extends AppCompatActivity
     List<String> mSelectedItems;
     AlertDialog.Builder typeDialog;
     boolean type_boolean[] = new boolean[7];
+    boolean defaultboolean[] = new boolean[7];
+
 
     //마커 배열
     ArrayList<Marker> markerArrayList = new ArrayList<Marker>();
@@ -107,6 +109,15 @@ public class FindChargingStationActivity extends AppCompatActivity
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_near_btn);
         type_btn = (ImageButton) findViewById(R.id.type_btn);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        if(!PreferenceManager.getBoolean(this, "default_boolean")){
+            PreferenceManager.setBoolean(this, "default_boolean", true);
+            defaultboolean[1] = true; defaultboolean[2] = true;
+            for (int i = 0; i < 7; i++) {
+                PreferenceManager.setBoolean(this, "types_boolean" + i, defaultboolean[i]);
+//                Log.i("myTag", "test" + i + type_boolean[i]);
+            }
+        }
 
         get_types(this);
 
