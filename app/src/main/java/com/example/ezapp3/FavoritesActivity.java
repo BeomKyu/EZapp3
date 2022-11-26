@@ -49,6 +49,8 @@ public class FavoritesActivity extends AppCompatActivity {
 //                            Toast.LENGTH_SHORT).show();
 //
 //                    Log.i("myTag", "test2");
+                    Intent intent = new Intent(getApplicationContext(), com.example.ezapp3.FindChargingStationActivity.class);
+                    startActivity(intent);
                 }
             });
             favorite_btn[i].setOnLongClickListener(new View.OnLongClickListener() {
@@ -104,13 +106,17 @@ public class FavoritesActivity extends AppCompatActivity {
         PreferenceManager.setString(mContext, "favorite" + i, "");
     }
 
+    private void set_favorites_station(Context mContext, int i, String station){
+        PreferenceManager.setString(mContext, "favorite" + i, station);
+    }
+
 
     private void setText_favorites_station(Context context){
         for (int i = 1; i < 7; i++) {
             if(text[i-1].equals("")){
-//                favorite_btn[i-1].setText(String.valueOf(i));
             }
             else{
+                String station_split[] = PreferenceManager.getString(context, "rebuild").split("");
                 favorite_btn[i-1].setText(text[i-1]);
             }
         }
