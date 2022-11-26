@@ -365,7 +365,7 @@ public class FindChargingStationActivity extends AppCompatActivity
                                     for(int i = 0; i < placList.length; i++){
                                         place = placList[i].split("\n\n");
                                         int type = getLastData(place[1]);
-                                        if(type_boolean[type] == true){
+                                        if(type_boolean[type-1] == true){
                                             latLng = new LatLng(Double.parseDouble(place[3]), Double.parseDouble(place[4]));
                                             Log.i("MystatNm", place[0]);
                                             Log.i("Mytype", place[1]);
