@@ -124,14 +124,12 @@ public class FavoritesActivity extends AppCompatActivity {
                 favorite_btn[i-1].setText(text[i-1]);
             }
         }
-        //            PreferenceManager.setString(mContext, "rebuild", "숲속의 작은 이야기");
 
     }
 
     private void get_favorites_station(Context context) {
         for (int i = 1; i < 7; i++) {
             text[i-1] = PreferenceManager.getString(context, "favorite" + i);
-//            Log.i("myTag", "text" + i + text[i-1]);
         }
     }
 }

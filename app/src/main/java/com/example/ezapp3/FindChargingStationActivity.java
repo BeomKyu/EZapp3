@@ -113,10 +113,8 @@ public class FindChargingStationActivity extends AppCompatActivity
 
         if(!PreferenceManager.getBoolean(this, "default_boolean")){
             PreferenceManager.setBoolean(this, "default_boolean", true);
-            defaultboolean[1] = true; defaultboolean[2] = true;
             for (int i = 0; i < 7; i++) {
                 PreferenceManager.setBoolean(this, "types_boolean" + i, defaultboolean[i]);
-//                Log.i("myTag", "test" + i + type_boolean[i]);
             }
         }
 
