@@ -110,6 +110,7 @@ public class FindChargingStationActivity extends AppCompatActivity
         type_btn = (ImageButton) findViewById(R.id.type_btn);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
+
         if(!PreferenceManager.getBoolean(this, "default_boolean")){
             PreferenceManager.setBoolean(this, "default_boolean", true);
             defaultboolean[1] = true; defaultboolean[2] = true;
@@ -443,7 +444,6 @@ public class FindChargingStationActivity extends AppCompatActivity
         == PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
 
-//            moved_last_location();
             moved_last_location();
             search_current_place();
 

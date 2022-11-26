@@ -120,7 +120,7 @@ public class FavoritesActivity extends AppCompatActivity {
             if(text[i-1].equals("")){
             }
             else{
-                String station_split[] = PreferenceManager.getString(context, "rebuild").split("");
+                String station_split[] = PreferenceManager.getString(context, "favorite"+i).split(",");
                 favorite_btn[i-1].setText(text[i-1]);
             }
         }
