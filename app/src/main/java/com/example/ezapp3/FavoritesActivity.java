@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -50,6 +51,9 @@ public class FavoritesActivity extends AppCompatActivity {
 //
 //                    Log.i("myTag", "test2");
                     Intent intent = new Intent(getApplicationContext(), com.example.ezapp3.FindChargingStationActivity.class);
+                    intent.putExtra("zscode", "");
+                    intent.putExtra("zcode", "");
+//                    intent.putExtra("latlng", new LatLng());
                     startActivity(intent);
                 }
             });
