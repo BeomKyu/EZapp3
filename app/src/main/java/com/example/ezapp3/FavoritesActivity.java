@@ -60,9 +60,9 @@ public class FavoritesActivity extends AppCompatActivity {
             favorite_btn[i].setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-//                    Toast.makeText(getApplicationContext(), "222",
-//                            Toast.LENGTH_SHORT).show();
-//                    Log.i("myTag", "test");
+                    Toast.makeText(getApplicationContext(), "222",
+                            Toast.LENGTH_SHORT).show();
+                    Log.i("myTag", "test");
                     return true;
                 }
             });
