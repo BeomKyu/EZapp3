@@ -1,6 +1,7 @@
 package com.example.ezapp3;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,8 +30,8 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     @Override
     public View getInfoWindow(Marker marker) {
-        View view = context.getLayoutInflater().inflate(R.layout.custom_info_contents,
-                null);
+
+        View view = context.getLayoutInflater().inflate(R.layout.custom_info_contents, null);
 
 //        String infomationString = marker.getSnippet();
 //        String[] infomationSplit = infomationString.split("\n\n");

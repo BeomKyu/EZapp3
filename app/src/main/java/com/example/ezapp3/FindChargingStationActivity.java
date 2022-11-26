@@ -110,11 +110,13 @@ public class FindChargingStationActivity extends AppCompatActivity
         type_btn = (ImageButton) findViewById(R.id.type_btn);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-
         if(!PreferenceManager.getBoolean(this, "default_boolean")){
             PreferenceManager.setBoolean(this, "default_boolean", true);
+
             for (int i = 0; i < 7; i++) {
+                defaultboolean[i] = true;
                 PreferenceManager.setBoolean(this, "types_boolean" + i, defaultboolean[i]);
+//                Log.i("myTag", "test" + i + type_boolean[i]);
             }
         }
 
@@ -210,7 +212,6 @@ public class FindChargingStationActivity extends AppCompatActivity
                                 for(int i = 0; i < placList.length; i++){
                                     chargingPlace = placList[i].split("\n\n");
                                     latLng = new LatLng(Double.parseDouble(chargingPlace[3]), Double.parseDouble(chargingPlace[4]));
-                                    Log.i("MyTag", chargingPlace[0]);
                                     add_marker_to_map(latLng, chargingPlace[0], placList[i]);
                                 }
                             }
@@ -363,9 +364,13 @@ public class FindChargingStationActivity extends AppCompatActivity
                                     //0 ~ 6 :  충전소명, 충전소 타입, 주소, let, lng, 이용시간, 충전기상태, 상태갱신
                                     for(int i = 0; i < placList.length; i++){
                                         place = placList[i].split("\n\n");
-                                        latLng = new LatLng(Double.parseDouble(place[3]), Double.parseDouble(place[4]));
-                                        Log.i("MyTag", place[0]);
-                                        add_marker_to_map(latLng, place[0], placList[i]);
+                                        int type = getLastData(place[1]);
+                                        if(type_boolean[type] == true){
+                                            latLng = new LatLng(Double.parseDouble(place[3]), Double.parseDouble(place[4]));
+                                            Log.i("MystatNm", place[0]);
+                                            Log.i("Mytype", place[1]);
+                                            add_marker_to_map(latLng, place[0], placList[i]);
+                                        }
                                     }
 
                                 }
@@ -388,6 +393,10 @@ public class FindChargingStationActivity extends AppCompatActivity
 
 
     }
+    public int getLastData(String str){
+        return Integer.parseInt(str.substring(str.length() - 1));
+    }
+
 
     public void add_marker_to_map(LatLng marker_location, String title, String snippet) {
         Marker mMarker = this.map.addMarker(new MarkerOptions()
@@ -442,6 +451,7 @@ public class FindChargingStationActivity extends AppCompatActivity
         == PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
 
+//            moved_last_location();
             moved_last_location();
             search_current_place();
 
