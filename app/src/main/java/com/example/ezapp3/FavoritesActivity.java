@@ -45,42 +45,22 @@ public class FavoritesActivity extends AppCompatActivity {
             favorite_btn[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getApplicationContext(), "111",
-                            Toast.LENGTH_SHORT).show();
-
-                    Log.i("myTag", "test2");
+//                    Toast.makeText(getApplicationContext(), "111",
+//                            Toast.LENGTH_SHORT).show();
+//
+//                    Log.i("myTag", "test2");
                 }
             });
             favorite_btn[i].setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Toast.makeText(getApplicationContext(), "222",
-                            Toast.LENGTH_SHORT).show();
-                    Log.i("myTag", "test");
+//                    Toast.makeText(getApplicationContext(), "222",
+//                            Toast.LENGTH_SHORT).show();
+//                    Log.i("myTag", "test");
                     return true;
                 }
             });
         }
-
-
-//        for(int i = 0; i < favorite_btn.length; i++){
-//            favorite_btn[i].setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Toast.makeText(getApplicationContext(), "toas1t", Toast.LENGTH_SHORT);
-//
-//                }
-//            });
-//            int temp_i = i;
-//            favorite_btn[i].setOnLongClickListener(new View.OnLongClickListener() {
-//                @Override
-//                public boolean onLongClick(View view) {
-//                    delete_favorites_station(mContext, temp_i);
-//                    Toast.makeText(getApplicationContext(), "toast", Toast.LENGTH_SHORT);
-//                    return false;
-//                }
-//            });
-//        }
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
