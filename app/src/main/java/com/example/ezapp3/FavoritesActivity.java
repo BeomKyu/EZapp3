@@ -25,14 +25,6 @@ public class FavoritesActivity extends AppCompatActivity {
     private Button[] favorite_btn = new Button[6];
     private int[] resource = {R.id.favoriteButton1, R.id.favoriteButton2, R.id.favoriteButton3
             ,R.id.favoriteButton4, R.id.favoriteButton5, R.id.favoriteButton6};
-//    private Button favorite_btn2;
-//    private Button favorite_btn3;
-//    private Button favorite_btn4;
-//    private Button favorite_btn5;
-//    private Button favorite_btn6;
-
-    private String text[] = new String[6];
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,26 +35,31 @@ public class FavoritesActivity extends AppCompatActivity {
 
         for(int i = 0; i < 6; i++) {
             favorite_btn[i] = (Button) findViewById(resource[i]);
+            int finalI = i;
             favorite_btn[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Toast.makeText(getApplicationContext(), "111",
-//                            Toast.LENGTH_SHORT).show();
-//
-//                    Log.i("myTag", "test2");
-                    Intent intent = new Intent(getApplicationContext(), com.example.ezapp3.FindChargingStationActivity.class);
-                    intent.putExtra("zscode", "");
-                    intent.putExtra("zcode", "");
-//                    intent.putExtra("latlng", new LatLng());
-                    startActivity(intent);
+                    String temp_split_station[] = PreferenceManager
+                            .getString(mContext, "favorite"+(finalI+1)).split("\n\n");
+                    if(temp_split_station.length != 0) {
+                        Intent intent = new Intent(getApplicationContext(),
+                                com.example.ezapp3.FindChargingStationActivity.class);
+//                    title, zcode, zscode, lat, lng
+                        intent.putExtra("zcode", temp_split_station[1]);
+                        intent.putExtra("zscode", temp_split_station[2]);
+                        intent.putExtra("lat", temp_split_station[3]);
+                        intent.putExtra("lng", temp_split_station[4]);
+                        intent.putExtra("favoriteBool", true);
+                        startActivity(intent);
+                    }
                 }
             });
             favorite_btn[i].setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Toast.makeText(getApplicationContext(), "222",
-                            Toast.LENGTH_SHORT).show();
-                    Log.i("myTag", "test");
+//                    Log.i("myTag", String.valueOf(finalI));
+                    delete_favorites_station(mContext, finalI);
+                    setText_favorites_station(mContext);
                     return true;
                 }
             });
@@ -98,38 +95,39 @@ public class FavoritesActivity extends AppCompatActivity {
         });
 
         mContext = this;
-//        PreferenceManager.setString(mContext, "favorite1", "숲속의 작은 이야기");
+//        set_favorites_station(mContext, "something", "4", "5", "6", "7");
+//        setText_favorites_station(mContext);
 
-        get_favorites_station(mContext);
         setText_favorites_station(mContext);
-//        PreferenceManager.setString(mContext, "favorite2", "숲속의 작은 이야기");
     }
 
 
     private void delete_favorites_station(Context mContext, int i) {
-        PreferenceManager.setString(mContext, "favorite" + i, "");
+        PreferenceManager.setString(mContext, "favorite" + (i+1), "");
     }
 
-    private void set_favorites_station(Context mContext, int i, String station){
-        PreferenceManager.setString(mContext, "favorite" + i, station);
+    private void set_favorites_station(Context mContext, String title, String zcode, String zscode, String lat, String lng){
+        String station = String.format("%s\n\n%s\n\n%s\n\n%s\n\n%s", title, zcode, zscode, lat, lng);
+        int i = 0;
+        for (i = 1; i < 7; i++) {
+            String temp_station = PreferenceManager.getString(mContext, "favorite"+i);
+            if(temp_station == ""){
+                PreferenceManager.setString(mContext, "favorite" + (i), station);
+                return;
+            }
+        }
+        if(i==7)
+        Toast.makeText(mContext, "즐겨찾기를 삭제 후 추가해 주세요.", Toast.LENGTH_SHORT).show();
     }
 
 
     private void setText_favorites_station(Context context){
         for (int i = 1; i < 7; i++) {
-            if(text[i-1].equals("")){
-            }
-            else{
-                String station_split[] = PreferenceManager.getString(context, "favorite"+i).split(",");
-                favorite_btn[i-1].setText(text[i-1]);
+            String station_split[] = PreferenceManager.getString(context, "favorite"+i).split("\n\n");
+            if(station_split.length != 0){
+                favorite_btn[i-1].setText(station_split[0]);
             }
         }
 
-    }
-
-    private void get_favorites_station(Context context) {
-        for (int i = 1; i < 7; i++) {
-            text[i-1] = PreferenceManager.getString(context, "favorite" + i);
-        }
     }
 }

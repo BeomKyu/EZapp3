@@ -225,20 +225,31 @@ public class FindChargingStationActivity extends AppCompatActivity
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
+        Intent checkIntent = getIntent();
+
+        if(checkIntent.getBooleanExtra("favoriteBool", false)){
+            String zcode = checkIntent.getStringExtra("zcode");
+            String zscode = checkIntent.getStringExtra("zscode");
+            String lat = checkIntent.getStringExtra("lat");
+            String lng = checkIntent.getStringExtra("lng");
+            LatLng mLatlng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+            Toast.makeText(this, zcode + zscode, Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
     private void set_types(Context context){
         for (int i = 0; i < 7; i++) {
             PreferenceManager.setBoolean(context, "types_boolean" + i, type_boolean[i]);
-            Log.i("myTag", "test" + i + type_boolean[i]);
+//            Log.i("myTag", "test" + i + type_boolean[i]);
         }
     }
 
     private void get_types(Context context) {
         for (int i = 0; i < 7; i++) {
             type_boolean[i] = PreferenceManager.getBoolean(context, "types_boolean" + i);
-            Log.i("myTag", "test" + i + type_boolean[i]);
+//            Log.i("myTag", "test" + i + type_boolean[i]);
         }
     }
 
