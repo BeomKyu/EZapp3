@@ -41,7 +41,7 @@ public class FavoritesActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     String temp_split_station[] = PreferenceManager
                             .getString(mContext, "favorite"+(finalI+1)).split("\n\n");
-                    if(temp_split_station.length != 0) {
+                    if(temp_split_station.length > 1) {
                         Intent intent = new Intent(getApplicationContext(),
                                 com.example.ezapp3.FindChargingStationActivity.class);
 //                    title, zcode, zscode, lat, lng
