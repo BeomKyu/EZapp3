@@ -2,6 +2,7 @@ package com.example.ezapp3;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Status;
@@ -98,6 +99,9 @@ public class FindChargingStationActivity extends AppCompatActivity
     APITask searchTask;
 
     BottomNavigationView bottomNavigationView;
+
+    //커스텀 다이얼로그
+    Dialog customDialog;
 
     @SuppressLint("MissingPermission")
     @Override
@@ -431,8 +435,8 @@ public class FindChargingStationActivity extends AppCompatActivity
 
 //        map.setInfoWindowAdapter(null);
 
-        CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this);
-        map.setInfoWindowAdapter(adapter);
+        //CustomInfoWindowAdapter adapter = new CustomInfoWindowAdapter(this);
+        //map.setInfoWindowAdapter(adapter);
     }
 
     @SuppressLint("MissingPermission")
@@ -550,9 +554,16 @@ public class FindChargingStationActivity extends AppCompatActivity
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
 
-        Toast.makeText(this, "Marker button clicked"
-                + marker.getId() + marker.getTitle(), Toast.LENGTH_SHORT)
-                .show();
+        //Toast.makeText(this, "Marker button clicked"
+        //        + marker.getId() + marker.getTitle(), Toast.LENGTH_SHORT)
+        //        .show();
+
+        CustomDialogFragment fragment = new CustomDialogFragment();
+        Bundle args = new Bundle();
+        args.putString("title", marker.getTitle());
+        args.putString("info", marker.getSnippet());
+        fragment.setArguments(args);
+        fragment.show(getSupportFragmentManager(), "customDialog");
 
         return false;
     }
