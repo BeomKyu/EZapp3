@@ -94,6 +94,7 @@ public class FindChargingStationActivity extends AppCompatActivity
     boolean defaultboolean[] = new boolean[7];
     Intent checkIntent;
     boolean intentBool;
+    LatLng current_latlng;
 
 
     //마커 배열
@@ -350,6 +351,7 @@ public class FindChargingStationActivity extends AppCompatActivity
                     FindCurrentPlaceResponse response = task.getResult();
                     List<PlaceLikelihood> placeLikelihood = response.getPlaceLikelihoods();
                     addr[0] = placeLikelihood.get(0).getPlace().getAddress();
+                    current_latlng = placeLikelihood.get(0).getPlace().getLatLng();
 
                     apiTask.setNowPlace(return_regional_code(addr[0]));
 
@@ -577,11 +579,12 @@ public class FindChargingStationActivity extends AppCompatActivity
         //Toast.makeText(this, "Marker button clicked"
         //        + marker.getId() + marker.getTitle(), Toast.LENGTH_SHORT)
         //        .show();
-
         CustomDialogFragment fragment = new CustomDialogFragment();
         Bundle args = new Bundle();
         args.putString("title", marker.getTitle());
         args.putString("info", marker.getSnippet());
+        args.putString("myPlaceLat", String.valueOf(current_latlng.latitude));
+        args.putString("myPlaceLng", String.valueOf(current_latlng.longitude));
         fragment.setArguments(args);
         fragment.show(getSupportFragmentManager(), "customDialog");
 

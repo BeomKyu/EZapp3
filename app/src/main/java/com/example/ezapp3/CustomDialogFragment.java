@@ -3,6 +3,8 @@ package com.example.ezapp3;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class CustomDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -20,6 +24,9 @@ public class CustomDialogFragment extends DialogFragment {
         Bundle bundle = getArguments();
         String title = bundle.getString("title");
         String[] informationSplit = bundle.getString("info").split("\n\n");
+        String lat = bundle.getString("myPlaceLat");
+        String lng = bundle.getString("myPlaceLng");
+//        Log.i("myTag", lat +" " + lng);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.custom_info_contents, null);
@@ -54,6 +61,16 @@ public class CustomDialogFragment extends DialogFragment {
             }
         });
 
+        arrival_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://route?sp="+lat+","+lng+"&ep="+informationSplit[3]+","+informationSplit[4]+"&by=CAR")));
+                }catch (android.content.ActivityNotFoundException e){
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=net.daum.android.map")));
+                }
+            }
+        });
         tvTitle.setText(title);
         tvNumber.setText(informationSplit[0]);
         tvFee.setText(informationSplit[3]);
