@@ -29,7 +29,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     @Override
     public View getInfoWindow(Marker marker) {
-        View view = context.getLayoutInflater().inflate(R.layout.custom_info_contents,
+        View view = context.getLayoutInflater().inflate(R.layout.dummy_layout,
                 null);
 
 //        String infomationString = marker.getSnippet();
