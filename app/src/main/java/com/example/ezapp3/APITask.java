@@ -97,6 +97,12 @@ public class APITask {
                             buffer.append(xpp.getText());
                             buffer.append("\n\n");
                         }
+                        else if(tag.equals("limitDetail")) {
+                            buffer.append("제한사유 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }
                         break;
                     case XmlPullParser.TEXT:
                         break;
