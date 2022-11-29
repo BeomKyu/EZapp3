@@ -54,7 +54,7 @@ public class APITask {
 
                         if(tag.equals("item")) ;
                         else if(tag.equals("statNm")) {
-                            buffer.append("충전소명 : ");
+                            buffer.append("");
                             xpp.next();
                             buffer.append(xpp.getText());
                             buffer.append("\n\n");
@@ -103,7 +103,18 @@ public class APITask {
                             buffer.append(xpp.getText());
                             buffer.append("\n\n");
                         }
+                        else if(tag.equals("zcode")) {
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }
+                        else if(tag.equals("zscode")) {
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }
                         break;
+
                     case XmlPullParser.TEXT:
                         break;
 

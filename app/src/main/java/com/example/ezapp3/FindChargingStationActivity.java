@@ -92,6 +92,8 @@ public class FindChargingStationActivity extends AppCompatActivity
     AlertDialog.Builder typeDialog;
     boolean type_boolean[] = new boolean[7];
     boolean defaultboolean[] = new boolean[7];
+    Intent checkIntent;
+    boolean intentBool;
 
 
     //마커 배열
@@ -113,6 +115,8 @@ public class FindChargingStationActivity extends AppCompatActivity
         ImageButton add_marker_btn = (ImageButton) findViewById(R.id.add_near_btn);
         type_btn = (ImageButton) findViewById(R.id.type_btn);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        checkIntent = getIntent();
+        intentBool = checkIntent.getBooleanExtra("favoriteBool", false);
 
         if(!PreferenceManager.getBoolean(this, "default_boolean")){
             PreferenceManager.setBoolean(this, "default_boolean", true);
@@ -229,17 +233,6 @@ public class FindChargingStationActivity extends AppCompatActivity
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
-        Intent checkIntent = getIntent();
-
-        if(checkIntent.getBooleanExtra("favoriteBool", false)){
-            String zcode = checkIntent.getStringExtra("zcode");
-            String zscode = checkIntent.getStringExtra("zscode");
-            String lat = checkIntent.getStringExtra("lat");
-            String lng = checkIntent.getStringExtra("lng");
-            LatLng mLatlng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
-            Toast.makeText(this, zcode + zscode, Toast.LENGTH_SHORT).show();
-
-        }
 
     }
 
@@ -466,10 +459,8 @@ public class FindChargingStationActivity extends AppCompatActivity
         == PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
 
-//            moved_last_location();
             moved_last_location();
             search_current_place();
-
             return;
         }
         PermissionUtils.requestLocationPermissions(this, LOCATION_PERMISSION_REQUEST_CODE, true);
@@ -521,6 +512,16 @@ public class FindChargingStationActivity extends AppCompatActivity
                     LatLng myLatLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 17));
                     fusedLocationClient.removeLocationUpdates(this);
+                    if(intentBool){
+                        String zcode = checkIntent.getStringExtra("zcode");
+                        String zscode = checkIntent.getStringExtra("zscode");
+                        String lat = checkIntent.getStringExtra("lat");
+                        String lng = checkIntent.getStringExtra("lng");
+                        LatLng mLatlng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(mLatlng, 17));
+
+
+                    }
                 }
             }
         };
