@@ -15,14 +15,15 @@
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/activity_loading.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/activity_maps.xml" value="0.254981884057971" />
-        <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/custom_info_contents.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/custom_info_contents.xml" value="0.1" />
+        <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/dummy_layout.xml" value="0.25181159420289856" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/layout/listitem.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/menu/bottom_menu.xml" value="0.35520833333333335" />
         <entry key="..\:/Users/by030/AndroidStudioProjects/EZapp3/app/src/main/res/menu/current_place_menu.xml" value="0.35520833333333335" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
