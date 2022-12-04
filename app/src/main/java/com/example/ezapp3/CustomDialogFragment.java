@@ -1,5 +1,8 @@
 package com.example.ezapp3;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -34,10 +37,18 @@ public class CustomDialogFragment extends DialogFragment {
         builder.setView(view);
 
         TextView tvNumber = (TextView) view.findViewById(R.id.call_number);
-        TextView tvFee = (TextView) view.findViewById(R.id.fee);
         TextView tvWhere = (TextView) view.findViewById(R.id.where);
         TextView tvTime = (TextView) view.findViewById(R.id.time);
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
+        TextView tvBnm = (TextView) view.findViewById(R.id.bnm);
+        TextView tvBusiNm = (TextView) view.findViewById(R.id.busiNm);
+        TextView tvBusiCall = (TextView) view.findViewById(R.id.busiCall);
+        TextView tvMethod = (TextView) view.findViewById(R.id.method);
+        TextView tvNote = (TextView) view.findViewById(R.id.note);
+        TextView tvLimitYn = (TextView) view.findViewById(R.id.limitYn);
+        TextView tvLimitDetail = (TextView) view.findViewById(R.id.limitDetail);
+        TextView tvStatUpdDt = (TextView) view.findViewById(R.id.statUpdDt);
+
 
         Button favorite_button = (Button) view.findViewById(R.id.favorite_button);
         Button arrival_button = (Button) view.findViewById(R.id.arrival_button);
@@ -73,9 +84,42 @@ public class CustomDialogFragment extends DialogFragment {
         });
         tvTitle.setText(title);
         tvNumber.setText(informationSplit[0]);
-        tvFee.setText(informationSplit[3]);
-        tvWhere.setText(informationSplit[2]);
         tvTime.setText(informationSplit[1]);
+        tvWhere.setText(informationSplit[2]);
+        tvBnm.setText(informationSplit[6]);//기관명
+        tvBusiNm.setText(informationSplit[7]);//운영기관명
+        tvBusiCall.setText(informationSplit[8]);//운영기관 연락처
+        if(informationSplit[11].substring(7).equals("null"))
+            tvMethod.setVisibility(GONE);
+        else {
+            tvMethod.setVisibility(VISIBLE);
+            tvMethod.setText(informationSplit[11]);//충전 방식
+        }
+        if(informationSplit[14].substring(9).equals("null"))
+            tvNote.setVisibility(GONE);
+        else {
+            tvNote.setVisibility(VISIBLE);
+            tvNote.setText(informationSplit[14]);//충전소 안내
+        }
+        if(informationSplit[15].substring(9).equals("Y")) {
+            tvLimitYn.setText("이용자 제한 : 있음");
+            tvLimitDetail.setVisibility(VISIBLE);
+            tvLimitDetail.setText(informationSplit[16]);
+        }
+        else {
+            tvLimitYn.setText("이용자 제한 : 없음");
+            tvLimitDetail.setVisibility(GONE);
+        }
+        System.out.println(informationSplit[10]);
+        tvStatUpdDt.setText(
+                informationSplit[10].substring(0, 9) +
+                informationSplit[10].substring(9, 13) + "/" +
+                informationSplit[10].substring(13, 15) + "/" +
+                informationSplit[10].substring(15, 17) + " " +
+                informationSplit[10].substring(17, 19) + ":" +
+                informationSplit[10].substring(19, 21) + ":" +
+                informationSplit[10].substring(21));//상태 갱신 일시
+
 
         return builder.create();
     }
