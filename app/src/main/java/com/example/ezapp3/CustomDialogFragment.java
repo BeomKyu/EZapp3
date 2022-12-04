@@ -46,8 +46,8 @@ public class CustomDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
 //                title, zcode, zscode, lat, lng
-                String station = String.format("%s\n\n%s\n\n%s\n\n%s\n\n%s", title, informationSplit[9],
-                        informationSplit[10], informationSplit[3], informationSplit[4]);
+                String station = String.format("%s\n\n%s\n\n%s\n\n%s\n\n%s", title, informationSplit[12],
+                        informationSplit[13], informationSplit[3], informationSplit[4]);
                 Log.i("myTag", informationSplit[3] + informationSplit[4]);
                 int i = 0;
                 for (i = 1; i < 7; i++) {

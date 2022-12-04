@@ -113,6 +113,42 @@ public class APITask {
                             buffer.append(xpp.getText());
                             buffer.append("\n\n");
                         }
+                        else if(tag.equals("bnm")) {
+                            buffer.append("기관명 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }
+                        else if(tag.equals("busiNm")) {
+                            buffer.append("운영기관명 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }
+                        else if(tag.equals("busiCall")) {
+                            buffer.append("운영기관 연락처 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }
+                        else if(tag.equals("method")) {
+                            buffer.append("충전방식 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }
+                        else if(tag.equals("note")) {
+                            buffer.append("충전소 안내 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }
+                        else if(tag.equals("limitYn")) {
+                            buffer.append("이용자 제한 : ");
+                            xpp.next();
+                            buffer.append(xpp.getText());
+                            buffer.append("\n\n");
+                        }
                         break;
 
                     case XmlPullParser.TEXT:
