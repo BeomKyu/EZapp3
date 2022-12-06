@@ -131,6 +131,8 @@ public class FindChargingStationActivity extends AppCompatActivity
 
         get_types(this);
 
+
+
         type_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -220,8 +222,15 @@ public class FindChargingStationActivity extends AppCompatActivity
                                 //0 ~ 6 :  충전소명, 충전소 타입, 주소, let, lng, 이용시간, 충전기상태, 상태갱신
                                 for(int i = 0; i < placList.length; i++){
                                     chargingPlace = placList[i].split("\n\n");
-                                    latLng = new LatLng(Double.parseDouble(chargingPlace[3]), Double.parseDouble(chargingPlace[4]));
-                                    add_marker_to_map(latLng, chargingPlace[0], placList[i]);
+//                                    latLng = new LatLng(Double.parseDouble(chargingPlace[3]), Double.parseDouble(chargingPlace[4]));
+//                                    add_marker_to_map(latLng, chargingPlace[0], placList[i]);
+                                    int type = getLastData(chargingPlace[1]);
+                                    if(type_boolean[type-1] == true){
+                                        latLng = new LatLng(Double.parseDouble(chargingPlace[3]), Double.parseDouble(chargingPlace[4]));
+                                        Log.i("MystatNm", chargingPlace[0]);
+                                        Log.i("Mytype", chargingPlace[1]);
+                                        add_marker_to_map(latLng, chargingPlace[0], placList[i]);
+                                    }
                                 }
                             }
                         });
@@ -234,6 +243,9 @@ public class FindChargingStationActivity extends AppCompatActivity
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
+
+
+
 
     }
 
@@ -522,6 +534,37 @@ public class FindChargingStationActivity extends AppCompatActivity
                         LatLng mLatlng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
                         map.moveCamera(CameraUpdateFactory.newLatLngZoom(mLatlng, 17));
 
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // TODO Auto-generated method stub
+
+                                try {
+                                    String place[] = new String[2];
+                                    place[0] = zcode;
+                                    place[1] = zscode;
+                                    searchTask.setNowPlace(place);
+                                    nowPlace = searchTask.getAPIData();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        delete_allmarker_from_map();
+                                        // TODO Auto-generated method stub
+                                        placList = nowPlace.split("\n\n\n");
+                                        String[] chargingPlace;
+                                        //0 ~ 6 :  충전소명, 충전소 타입, 주소, let, lng, 이용시간, 충전기상태, 상태갱신
+                                        for(int i = 0; i < placList.length; i++){
+                                            chargingPlace = placList[i].split("\n\n");
+                                            latLng = new LatLng(Double.parseDouble(chargingPlace[3]), Double.parseDouble(chargingPlace[4]));
+                                            add_marker_to_map(latLng, chargingPlace[0], placList[i]);
+                                        }
+                                    }
+                                });
+                            }
+                        }).start();
 
                     }
                 }
