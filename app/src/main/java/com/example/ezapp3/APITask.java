@@ -28,7 +28,7 @@ public class APITask {
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B552584/EvCharger/getChargerInfo"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + key); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("9999", "UTF-8")); /*한 페이지 결과 수 (최소 10, 최대 9999)*/
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("100", "UTF-8")); /*한 페이지 결과 수 (최소 10, 최대 9999)*/
         urlBuilder.append("&" + URLEncoder.encode("zcode","UTF-8") + "=" + URLEncoder.encode(nowZcode, "UTF-8")); /*시도 코드 (행정구역코드 앞 2자리)*/
         urlBuilder.append("&" + URLEncoder.encode("zscode", "UTF-8") + "=" + URLEncoder.encode(nowZscode, "UTF-8")); /*시도 상세코드 (행정구역코드 5자리)*/
 

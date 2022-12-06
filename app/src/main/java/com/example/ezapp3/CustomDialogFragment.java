@@ -85,8 +85,8 @@ public class CustomDialogFragment extends DialogFragment {
         tvTitle.setText(title);
         tvNumber.setText(informationSplit[0]);
         switch(informationSplit[1]){
-            case "충전소타입 : 01" : tvTime.setText("충전소타입 :  DC 차데모");break;
-            case "충전소타입 : 02" : tvTime.setText("충전소타입 :  AC 완속");break;
+            case "충전소타입 : 01" : tvTime.setText("충전소타입 : DC 차데모");break;
+            case "충전소타입 : 02" : tvTime.setText("충전소타입 : AC 완속");break;
             case "충전소타입 : 03" : tvTime.setText("충전소타입 : DC 차데모 + AC3 상");break;
             case "충전소타입 : 04" : tvTime.setText("충전소타입 : DC 콤보");break;
             case "충전소타입 : 05" : tvTime.setText("충전소타입 : DC 차데모+DC 콤보");break;

@@ -97,6 +97,7 @@ public class FindChargingStationActivity extends AppCompatActivity
     LatLng current_latlng;
 
 
+
     //마커 배열
     ArrayList<Marker> markerArrayList = new ArrayList<Marker>();
 
@@ -394,7 +395,6 @@ public class FindChargingStationActivity extends AppCompatActivity
                                             add_marker_to_map(latLng, place[0], placList[i]);
                                         }
                                     }
-
                                 }
                             });
                         }
@@ -425,6 +425,7 @@ public class FindChargingStationActivity extends AppCompatActivity
                 .position(marker_location)
                 .title(title)
                 .snippet(snippet));
+        Log.i("myTag", snippet);
         markerArrayList.add(mMarker);
 //        melbourne.showInfoWindow();
 
@@ -525,6 +526,7 @@ public class FindChargingStationActivity extends AppCompatActivity
                 for(Location myLocation:locationResult.getLocations()){
                     LatLng myLatLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 17));
+                    current_latlng=myLatLng;
                     fusedLocationClient.removeLocationUpdates(this);
                     if(intentBool){
                         String zcode = checkIntent.getStringExtra("zcode");
@@ -577,7 +579,6 @@ public class FindChargingStationActivity extends AppCompatActivity
             }
         };
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
-
     }
 
 
