@@ -540,11 +540,8 @@ public class FindChargingStationActivity extends AppCompatActivity
                                 // TODO Auto-generated method stub
 
                                 try {
-                                    String place[] = new String[2];
-                                    place[0] = zcode;
-                                    place[1] = zscode;
-                                    searchTask.setNowPlace(place);
-                                    nowPlace = searchTask.getAPIData();
+                                    APITask apiTask = new APITask();
+                                    nowPlace = apiTask.getAPIData();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -554,13 +551,18 @@ public class FindChargingStationActivity extends AppCompatActivity
                                         delete_allmarker_from_map();
                                         // TODO Auto-generated method stub
                                         placList = nowPlace.split("\n\n\n");
-                                        String[] chargingPlace;
                                         //0 ~ 6 :  충전소명, 충전소 타입, 주소, let, lng, 이용시간, 충전기상태, 상태갱신
                                         for(int i = 0; i < placList.length; i++){
-                                            chargingPlace = placList[i].split("\n\n");
-                                            latLng = new LatLng(Double.parseDouble(chargingPlace[3]), Double.parseDouble(chargingPlace[4]));
-                                            add_marker_to_map(latLng, chargingPlace[0], placList[i]);
+                                            place = placList[i].split("\n\n");
+                                            int type = getLastData(place[1]);
+                                            if(type_boolean[type-1] == true){
+                                                latLng = new LatLng(Double.parseDouble(place[3]), Double.parseDouble(place[4]));
+                                                Log.i("MystatNm", place[0]);
+                                                Log.i("Mytype", place[1]);
+                                                add_marker_to_map(latLng, place[0], placList[i]);
+                                            }
                                         }
+
                                     }
                                 });
                             }
