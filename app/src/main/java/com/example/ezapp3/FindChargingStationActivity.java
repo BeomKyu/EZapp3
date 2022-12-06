@@ -541,6 +541,10 @@ public class FindChargingStationActivity extends AppCompatActivity
 
                                 try {
                                     APITask apiTask = new APITask();
+                                    String placeS[] = new String[2];
+                                    placeS[0] = zcode;
+                                    placeS[1] = zscode;
+                                    apiTask.setNowPlace(placeS);
                                     nowPlace = apiTask.getAPIData();
                                 } catch (IOException e) {
                                     e.printStackTrace();
