@@ -86,7 +86,7 @@ public class APITask {
                             buffer.append("\n\n");
                         }
                         else if(tag.equals("stat")) {
-                            buffer.append("충전기상태 : ");
+//                            buffer.append("충전기상태 : ");
                             xpp.next();
                             buffer.append(xpp.getText());
                             buffer.append("\n\n");

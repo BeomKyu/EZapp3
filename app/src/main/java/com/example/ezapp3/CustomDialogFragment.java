@@ -33,9 +33,11 @@ public class CustomDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.custom_info_contents, null);
+        Log.i("myTag", informationSplit[9]);
 
         builder.setView(view);
 
+        TextView tvStat = (TextView) view.findViewById(R.id.stat);
         TextView tvNumber = (TextView) view.findViewById(R.id.call_number);
         TextView tvWhere = (TextView) view.findViewById(R.id.where);
         TextView tvTime = (TextView) view.findViewById(R.id.time);
@@ -59,7 +61,7 @@ public class CustomDialogFragment extends DialogFragment {
 //                title, zcode, zscode, lat, lng
                 String station = String.format("%s\n\n%s\n\n%s\n\n%s\n\n%s", title, informationSplit[12],
                         informationSplit[13], informationSplit[3], informationSplit[4]);
-                Log.i("myTag", informationSplit[3] + informationSplit[4]);
+//                Log.i("myTag", informationSplit[3] + informationSplit[4]);
                 int i = 0;
                 for (i = 1; i < 7; i++) {
                     String temp_station = PreferenceManager.getString(getActivity(), "favorite"+i);
@@ -95,6 +97,15 @@ public class CustomDialogFragment extends DialogFragment {
             
         }
 //        tvTime.setText(informationSplit[1]);
+        switch (informationSplit[9]){
+            case "1" : tvStat.setText("통신이상");break;
+            case "2" : tvStat.setText("충전대기");break;
+            case "3" : tvStat.setText("충전중");break;
+            case "4" : tvStat.setText("운영중지");break;
+            case "5" : tvStat.setText("점검중");break;
+            case "6" : tvStat.setText("상태미확인");break;
+
+        }
         tvWhere.setText(informationSplit[2]);
         tvBnm.setText(informationSplit[6]);//기관명
         tvBusiNm.setText(informationSplit[7]);//운영기관명

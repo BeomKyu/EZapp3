@@ -12,6 +12,8 @@
     <string name="option_get_place">Get place</string>
     <string name="pick_place">Choose a place</string>
     <string-array name="types">
-        <item>1</item><item>2</item><item>3</item><item>4</item><item>5</item><item>6</item>
+        <item>DC 차데모</item><item>AC 완속</item><item>DC 차데모 + AC3 상</item>
+        <item>DC 콤보</item><item>DC 차데모+DC 콤보</item><item>DC 차데모+AC3 상+DC 콤보</item>
+        <item>AC3 상</item>
     </string-array>
 </resources>
