@@ -14,13 +14,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/rectiangle"
             android:orientation="vertical"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
             <ImageButton
                 android:id="@+id/electirc_vehicle_tips_button1"
                 android:layout_width="370dp"
-                android:layout_height="235dp"
+                android:layout_height="300dp"
                 android:gravity="center"
                 android:background="#e8fbe2"
                 android:layout_marginTop="10dp"
@@ -49,11 +49,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/rectiangle"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:orientation="vertical"
+            android:layout_marginBottom="80dp"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +68,9 @@
             <ImageButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
                 android:background="#e8fbe2"
                 android:src="@drawable/ic_station_logo"
                 android:id="@+id/find_charging_station_button"/>

@@ -103,7 +103,7 @@ public class CustomDialogFragment extends DialogFragment {
             case "3" : tvStat.setText("충전중");break;
             case "4" : tvStat.setText("운영중지");break;
             case "5" : tvStat.setText("점검중");break;
-            case "6" : tvStat.setText("상태미확인");break;
+            case "9" : tvStat.setText("상태미확인");break;
 
         }
         tvWhere.setText(informationSplit[2]);
